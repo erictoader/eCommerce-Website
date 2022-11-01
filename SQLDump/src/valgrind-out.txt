@@ -1,0 +1,136 @@
+==6877== Memcheck, a memory error detector
+==6877== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6877== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==6877== Command: ./main .
+==6877== Parent PID: 3201
+==6877== 
+--6877-- 
+--6877-- Valgrind options:
+--6877--    --leak-check=full
+--6877--    --show-leak-kinds=all
+--6877--    --track-origins=yes
+--6877--    --verbose
+--6877--    --log-file=valgrind-out.txt
+--6877-- Contents of /proc/version:
+--6877--   Linux version 5.13.0-44-generic (buildd@bos02-arm64-034) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #49~20.04.1-Ubuntu SMP Wed May 18 16:03:17 UTC 2022
+--6877-- 
+--6877-- Arch and hwcaps: ARM64, LittleEndian, baseline
+--6877-- Page sizes: currently 4096, max supported 65536
+--6877-- Valgrind library directory: /usr/lib/aarch64-linux-gnu/valgrind
+--6877-- Reading syms from /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main
+--6877-- Reading syms from /usr/lib/aarch64-linux-gnu/ld-2.31.so
+--6877--   Considering /usr/lib/aarch64-linux-gnu/ld-2.31.so ..
+--6877--   .. CRC mismatch (computed d22eb360 wanted b1809809)
+--6877--   Considering /lib/aarch64-linux-gnu/ld-2.31.so ..
+--6877--   .. CRC mismatch (computed d22eb360 wanted b1809809)
+--6877--   Considering /usr/lib/debug/lib/aarch64-linux-gnu/ld-2.31.so ..
+--6877--   .. CRC is valid
+--6877-- Reading syms from /usr/lib/aarch64-linux-gnu/valgrind/memcheck-arm64-linux
+--6877--    object doesn't have a symbol table
+--6877--    object doesn't have a dynamic symbol table
+--6877-- Scheduler: using generic scheduler lock implementation.
+--6877-- Reading suppressions file: /usr/lib/aarch64-linux-gnu/valgrind/default.supp
+==6877== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-6877-by-parallels-on-???
+==6877== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-6877-by-parallels-on-???
+==6877== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-6877-by-parallels-on-???
+==6877== 
+==6877== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==6877== don't want to do, unless you know exactly what you're doing,
+==6877== or are doing some strange experiment):
+==6877==   /usr/lib/aarch64-linux-gnu/valgrind/../../bin/vgdb --pid=6877 ...command...
+==6877== 
+==6877== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==6877==   /path/to/gdb ./main
+==6877== and then give GDB the following command
+==6877==   target remote | /usr/lib/aarch64-linux-gnu/valgrind/../../bin/vgdb --pid=6877
+==6877== --pid is optional if only one valgrind process is running
+==6877== 
+--6877-- REDIR: 0x4019300 (ld-linux-aarch64.so.1:strlen) redirected to 0x580c5de8 (???)
+--6877-- REDIR: 0x4018340 (ld-linux-aarch64.so.1:strcmp) redirected to 0x580c5e3c (???)
+--6877-- REDIR: 0x4018260 (ld-linux-aarch64.so.1:index) redirected to 0x580c5e10 (???)
+--6877-- Reading syms from /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_core-arm64-linux.so
+--6877--    object doesn't have a symbol table
+--6877-- Reading syms from /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so
+--6877--    object doesn't have a symbol table
+--6877-- Reading syms from /usr/lib/aarch64-linux-gnu/libc-2.31.so
+--6877--   Considering /usr/lib/aarch64-linux-gnu/libc-2.31.so ..
+--6877--   .. CRC mismatch (computed 67fe0029 wanted 7e0e6f00)
+--6877--   Considering /lib/aarch64-linux-gnu/libc-2.31.so ..
+--6877--   .. CRC mismatch (computed 67fe0029 wanted 7e0e6f00)
+--6877--   Considering /usr/lib/debug/lib/aarch64-linux-gnu/libc-2.31.so ..
+--6877--   .. CRC is valid
+--6877-- REDIR: 0x48f5a30 (libc.so.6:memchr) redirected to 0x48346c8 (_vgnU_ifunc_wrapper)
+--6877-- REDIR: 0x48f4858 (libc.so.6:strlen) redirected to 0x48346c8 (_vgnU_ifunc_wrapper)
+--6877-- REDIR: 0x48f62d0 (libc.so.6:memcpy) redirected to 0x48346c8 (_vgnU_ifunc_wrapper)
+--6877-- REDIR: 0x48f5ce0 (libc.so.6:memset) redirected to 0x48346c8 (_vgnU_ifunc_wrapper)
+--6877-- REDIR: 0x48f4cc0 (libc.so.6:rindex) redirected to 0x484cc40 (rindex)
+--6877-- REDIR: 0x48f79c0 (libc.so.6:rawmemchr) redirected to 0x48517c0 (rawmemchr)
+--6877-- REDIR: 0x48f79e0 (libc.so.6:strchrnul) redirected to 0x4851790 (strchrnul)
+--6877-- REDIR: 0x48fd3c0 (libc.so.6:__GI_strlen) redirected to 0x484d268 (__GI_strlen)
+--6877-- REDIR: 0x48f0378 (libc.so.6:malloc) redirected to 0x4849d18 (malloc)
+--6877-- REDIR: 0x48f5da0 (libc.so.6:mempcpy) redirected to 0x4851890 (mempcpy)
+--6877-- REDIR: 0x48fcc80 (libc.so.6:__GI_memset) redirected to 0x4850c50 (memset)
+--6877-- REDIR: 0x48f4308 (libc.so.6:strcspn) redirected to 0x48521b0 (strcspn)
+--6877-- REDIR: 0x48fbcd0 (libc.so.6:__GI_memcpy) redirected to 0x484efb0 (__GI_memcpy)
+==6877== Invalid read of size 2
+==6877==    at 0x484F118: __GI_memcpy (in /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so)
+==6877==    by 0x109333: extractDataset (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x1099D7: start (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x108F83: main (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==  Address 0x4a36066 is 582 bytes inside a block of size 583 alloc'd
+==6877==    at 0x4849D8C: malloc (in /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so)
+==6877==    by 0x48F457F: strdup (strdup.c:42)
+==6877==    by 0x10918B: extractDataset (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x1099D7: start (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x108F83: main (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877== 
+==6877== Invalid read of size 2
+==6877==    at 0x484F108: __GI_memcpy (in /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so)
+==6877==    by 0x109333: extractDataset (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x1099D7: start (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x108F83: main (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==  Address 0x4a3606c is 5 bytes after a block of size 583 alloc'd
+==6877==    at 0x4849D8C: malloc (in /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so)
+==6877==    by 0x48F457F: strdup (strdup.c:42)
+==6877==    by 0x10918B: extractDataset (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x1099D7: start (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x108F83: main (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877== 
+--6877-- REDIR: 0x48f0970 (libc.so.6:free) redirected to 0x484aeb0 (free)
+==6877== 
+==6877== HEAP SUMMARY:
+==6877==     in use at exit: 0 bytes in 0 blocks
+==6877==   total heap usage: 302 allocs, 302 frees, 486,475 bytes allocated
+==6877== 
+==6877== All heap blocks were freed -- no leaks are possible
+==6877== 
+==6877== ERROR SUMMARY: 7291 errors from 2 contexts (suppressed: 0 from 0)
+==6877== 
+==6877== 1733 errors in context 1 of 2:
+==6877== Invalid read of size 2
+==6877==    at 0x484F108: __GI_memcpy (in /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so)
+==6877==    by 0x109333: extractDataset (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x1099D7: start (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x108F83: main (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==  Address 0x4a3606c is 5 bytes after a block of size 583 alloc'd
+==6877==    at 0x4849D8C: malloc (in /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so)
+==6877==    by 0x48F457F: strdup (strdup.c:42)
+==6877==    by 0x10918B: extractDataset (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x1099D7: start (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x108F83: main (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877== 
+==6877== 
+==6877== 5558 errors in context 2 of 2:
+==6877== Invalid read of size 2
+==6877==    at 0x484F118: __GI_memcpy (in /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so)
+==6877==    by 0x109333: extractDataset (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x1099D7: start (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x108F83: main (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==  Address 0x4a36066 is 582 bytes inside a block of size 583 alloc'd
+==6877==    at 0x4849D8C: malloc (in /usr/lib/aarch64-linux-gnu/valgrind/vgpreload_memcheck-arm64-linux.so)
+==6877==    by 0x48F457F: strdup (strdup.c:42)
+==6877==    by 0x10918B: extractDataset (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x1099D7: start (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877==    by 0x108F83: main (in /media/psf/OneDrive-TechnicalUniversityofCluj-Napoca/ANUL III/IS/Proiect/SQLDump/dumpGenerator/src/main)
+==6877== 
+==6877== ERROR SUMMARY: 7291 errors from 2 contexts (suppressed: 0 from 0)
