@@ -1,3 +1,3 @@
 export abstract class AppConfig {
-    static baseUrl :String = "localhost:6060/"
+    static baseUrl :String = "http://localhost:6060/"
 }
