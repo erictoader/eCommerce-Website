@@ -127,9 +127,10 @@ float _getRandomRating() {
 
 int createDump(DatasetItem* items, int nrItems, char* dirPath, int outDumpFd) {
     srand(time(NULL));
-    write(outDumpFd, "/*	SQL Dump Generator (Software Engineering 2022/2023)\n/*	Technical University of Cluj-Napoca\n/*\n/*	Author: Toader Eric-Stefan\n/*\n/*	29.10.2022\n/*\n/*	https://github.com/erictoader */\n\nSET NAMES utf8mb4;\n\n# Dump of table PRODUCT\n# ------------------------------------------------------------\n\nDROP TABLE IF EXISTS `PRODUCT`;\n\nCREATE TABLE `PRODUCT` (\n  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n  `name` varchar(512) NOT NULL,\n  `desc` varchar(512) NOT NULL,\n  `price` float unsigned NOT NULL,\n  `available` tinyint(1) unsigned NOT NULL DEFAULT '0',\n  `image` longblob,\n  `rating` float unsigned DEFAULT '0',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\n\n# Inserting into table\n# ------------------------------------------------------------\n\n", 760);
+    write(outDumpFd, "/*	SQL Dump Generator (Software Engineering 2022/2023)\n/*	Technical University of Cluj-Napoca\n/*\n/*	Author: Toader Eric-Stefan\n/*\n/*	29.10.2022\n/*\n/*	https://github.com/erictoader */\n\nSET NAMES utf8mb4;\n\n", 204);
+    write(outDumpFd, "# Dump of table USER\n# ------------------------------------------------------------\n\nDROP TABLE IF EXISTS `USER`;\n\nCREATE TABLE `USER` (\n  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n  `name` varchar(64),\n  `username` varchar(32) NOT NULL,\n  `password` varchar(32) NOT NULL,\n  `user_type` tinyint(1) unsigned NOT NULL DEFAULT '0',\n  `profile_picture` longblob,\n  `registration_date` int(14) DEFAULT '0',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\n\n# Inserting into table\n# ------------------------------------------------------------\n\nINSERT INTO `USER` (`name`, `username`, `password`, `user_type`, `profile_picture`, `registration_date`)\nVALUES\n	('The Admin','admin','admin',0,NULL,0),\n	('Test Client','testclient','client',1,NULL,0),\n	('Test Seller','testseller','seller',2,NULL,0);\n\nUNLOCK TABLES;\n\n", 822);
+    write(outDumpFd, "# Dump of table PRODUCT\n# ------------------------------------------------------------\n\nDROP TABLE IF EXISTS `PRODUCT`;\n\nCREATE TABLE `PRODUCT` (\n  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n  `name` varchar(512) NOT NULL,\n  `desc` varchar(512) NOT NULL,\n  `price` float unsigned NOT NULL,\n  `available` tinyint(1) unsigned NOT NULL DEFAULT '0',\n  `image` longblob,\n  `rating` float unsigned DEFAULT '0',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\n\n# Inserting into table\n# ------------------------------------------------------------\n\n", 556);
     write(outDumpFd, "INSERT INTO `PRODUCT` (`id`, `name`, `desc`, `price`, `available`, `image`, `rating`)\nVALUES\n", 93);
-
     for (int i = 0; i < nrItems - 1; i++) {
         int available = _getRandomAvailability((int)items[i].price);
         float rating = _getRandomRating();
@@ -156,7 +157,6 @@ void makePythonFile(DatasetItem* items, int nrItems) {
     int fd = open("download_script.py", O_WRONLY | O_CREAT, 0644);
     write(fd, "from bing_image_downloader import downloader\n\n", 46);
     write(fd, "def download_images():\n", 23);
-    // downloader.download("another", sequentialItem=1, limit=1, output_dir="imgs", adult_filter_off=False, force_replace=False, timeout=60)
     for(int i = 0; i < nrItems; i++) {
         char entry[1024];
         memset(entry, 0, 1024);

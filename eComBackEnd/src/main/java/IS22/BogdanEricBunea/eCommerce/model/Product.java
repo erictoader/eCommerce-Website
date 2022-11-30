@@ -9,15 +9,14 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private String name;
     private String desc;
     private float price;
-    private int available;
+    private boolean available;
     private byte[] image;
     private float rating;
 
-    public Product(int id, String name, String desc, float price, int available, byte[] image, float rating) {
+    public Product(int id, String name, String desc, float price, boolean available, byte[] image, float rating) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -27,7 +26,7 @@ public class Product {
         this.rating = rating;
     }
 
-    public Product(String name, String desc, float price, int available, byte[] image, float rating) {
+    public Product(String name, String desc, float price, boolean available, byte[] image, float rating) {
         this.name = name;
         this.desc = desc;
         this.price = price;
@@ -71,11 +70,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getAvailable() {
+    public boolean getAvailable() {
         return available;
     }
 
-    public void setAvailable(int available) {
+    public void setAvailable(boolean available) {
         this.available = available;
     }
 
