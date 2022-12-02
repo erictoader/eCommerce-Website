@@ -1,6 +1,7 @@
 <table class="table">
     <thead class="table-dark">
         <tr>
+            <th></th>
             <th>Name</th>
             <th>Rating</th>
             <th>Available</th>
@@ -10,14 +11,13 @@
     </thead>
     <tbody>
         <tr *ngFor="let tempProduct of products">
-            <td>{{ tempProduct.name }}</td>
-            <td>{{ tempProduct.rating }}</td>
-            <td>{{ tempProduct.available }}</td>
-            <td>{{ tempProduct.price | currency:'EUR'}}</td>
+            <td class="align-middle">
+                <img src="assets/images/product-placeholder.png" height="50" />
+            </td>
+            <td class="align-middle">{{ tempProduct.name }}</td>
+            <td class="align-middle">{{ tempProduct.rating }}</td>
+            <td class="align-middle">{{ tempProduct.available }}</td>
+            <td class="align-middle">{{ tempProduct.price | currency:'EUR'}}</td>
         </tr>
     </tbody>
 </table>
-
-<p *ngFor="let tempProduct of products">
-    {{ tempProduct.name }} : {{ tempProduct.rating }} : {{ tempProduct.available }} : {{ tempProduct.price | currency:'EUR'}}
-<p>
