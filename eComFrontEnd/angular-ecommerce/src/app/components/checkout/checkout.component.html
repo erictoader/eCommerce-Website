@@ -147,9 +147,9 @@
                         </div>
                     </div>
                 </div>
-                <div formGroupName="paymentDetails" class="form-area">
+                <div formGroupName="cardDetails" class="form-area">
                     <div style="padding-bottom:50px">
-                        <h2>Payment Details</h2>
+                        <h2>Card Details</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-2">
@@ -197,11 +197,25 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <label>Expiration Date</label>
+                            <label>Expiration Year</label>
                         </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="expirationDate" type="text">
+                                <select formControlName="expirationYear" (change)="handleMonthsAndYears()">
+                                    <option *ngFor="let year of cardYears">{{year}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Expiration Month</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="expirationMonth">
+                                    <option *ngFor="let month of cardMonths">{{month}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
