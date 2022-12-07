@@ -6,7 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductService } from './services/product-service';
+import { ProductService } from './services/product.service';
+import { SearchComponent } from './components/search/search.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -21,6 +26,11 @@ import { fakeBackendProvider } from './components/FBE';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    SearchComponent,
+    ProductDetailsComponent,
+    CartStatusComponent,
+    CartDetailsComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

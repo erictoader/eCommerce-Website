@@ -26,11 +26,11 @@ int main(int argc, char **argv) {
 
     snprintf(tmpValidCheckFile, 512, "%s/%s", dirName, "main_valid_check.tmp");
 
-    tmpFd = open(tmpValidCheckFile, O_WRONLY | O_CREAT, 0644);
-    if (tmpFd < 0) {
-        printf("Image folder path is invalid\n%s\n", dirName);
-        exit(-2);
-    }
+    // tmpFd = open(tmpValidCheckFile, O_WRONLY | O_CREAT, 0644);
+    // if (tmpFd < 0) {
+    //     printf("Image folder path is invalid\n%s\n", dirName);
+    //     exit(-2);
+    // }
 
     if (dirName[0] != '/') {
         printf("Warning: Provided path is not absolute. Make sure that `%s` contains the product images.\n", dirName);
