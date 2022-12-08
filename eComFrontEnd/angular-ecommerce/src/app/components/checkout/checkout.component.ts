@@ -190,6 +190,5 @@ export class CheckoutComponent implements OnInit {
 
   //bogdan TODOs:
   //Sections:
-  //  22->review cart totals
   //  24->save the order to DB
 }
