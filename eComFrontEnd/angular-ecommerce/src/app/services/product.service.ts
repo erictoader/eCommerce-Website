@@ -23,7 +23,11 @@ export class ProductService {
             map(response => {
                 //todo: remove this when images work
                 response.forEach(element => {
-                    element.image = this.mockBase64Image;
+                    if(element.image == null){
+                        element.image = this.mockBase64Image;
+                    }else {
+                        element.image = "data:image/webp;base64," + element.image;
+                    }
                 });
                 return response;
             })
