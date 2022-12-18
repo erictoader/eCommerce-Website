@@ -31,15 +31,13 @@ public class UserController {
         return service.getUserByUsername(username);
     }
 
+    @GetMapping("/login")
+    public User getUserByUsernameAndPassword(@RequestBody User user) { return service.attemptLogin(user); }
+
     // POST
-    @PostMapping("/add")
+    @PostMapping("/register")
     public User saveUser(@RequestBody User user) {
         return service.saveProduct(user);
-    }
-
-    @PostMapping("/addAll")
-    public List<User> saveUsers(@RequestBody List<User> users) {
-        return service.saveProducts(users);
     }
 
     // DELETE
