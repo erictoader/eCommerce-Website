@@ -21,9 +21,12 @@ export class ProductService {
         const searchUrl = this.baseUrl + (categoryId == 2 ? "/getByName/Sony Turntable - PSLX350H" : "/getAll");
         return this.httpClient.get<Product[]>(searchUrl).pipe(
             map(response => {
-                //todo: remove this when images work
                 response.forEach(element => {
-                    element.image = this.mockBase64Image;
+                    if(element.image == null){
+                        element.image = this.mockBase64Image;
+                    }else {
+                        element.image = "data:image/webp;base64," + element.image;
+                    }
                 });
                 return response;
             })
