@@ -16,18 +16,20 @@ export class ProductService {
     
     constructor(private httpClient: HttpClient){}
 
+    handleImage(product: Product){
+        if(product.image == null){
+            product.image = this.mockBase64Image;
+        }else {
+            product.image = "data:image/webp;base64," + product.image;
+        }    
+    }
+    
     getProductList(categoryId: number): Observable<Product[]>{
         //bogdan: I think we should recieve always a list, even if we get one item or no item at all...
         const searchUrl = this.baseUrl + (categoryId == 2 ? "/getByName/Sony Turntable - PSLX350H" : "/getAll");
         return this.httpClient.get<Product[]>(searchUrl).pipe(
             map(response => {
-                response.forEach(element => {
-                    if(element.image == null){
-                        element.image = this.mockBase64Image;
-                    }else {
-                        element.image = "data:image/webp;base64," + element.image;
-                    }
-                });
+                response.forEach(product => this.handleImage(product));
                 return response;
             })
         );
@@ -39,22 +41,17 @@ export class ProductService {
         const searchUrl = this.baseUrl + `/getByName/${keyword}`;
         return this.httpClient.get<Product[]>(searchUrl).pipe(
             map(response => {
-                //todo: remove this when images work
-                response.forEach(element => {
-                    element.image = this.mockBase64Image;
-                });
+                response.forEach(product => this.handleImage(product));
                 return response;
             })
         );
     }
 
-      //
       searchSingleProduct(keyword: String): Observable<Product[]>{
         const searchUrl = this.baseUrl + `/getByName/${keyword}`;
         return this.httpClient.get<Product>(searchUrl).pipe(
             map(response => {
-                //todo: remove this when images work
-                response.image = this.mockBase64Image;
+                this.handleImage(response);
                 return [response];
             })
         );
@@ -64,8 +61,7 @@ export class ProductService {
         const searchUrl = this.baseUrl + `/getById/${id}`;
         return this.httpClient.get<Product>(searchUrl).pipe(
             map(response => {
-                //todo: remove this when images work
-                response.image = this.mockBase64Image;
+                this.handleImage(response);
                 return response;
             })
         );      
