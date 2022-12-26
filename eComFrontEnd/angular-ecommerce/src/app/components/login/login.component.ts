@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/services/login.service';
 import { AppValidators } from 'src/app/validators/app-validators';
 
 @Component({
@@ -10,7 +11,8 @@ import { AppValidators } from 'src/app/validators/app-validators';
 export class LoginComponent implements OnInit{
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
   ){}
 
   loginFormGroup: FormGroup = new FormGroup({});
@@ -38,6 +40,11 @@ export class LoginComponent implements OnInit{
       this.loginFormGroup.markAllAsTouched();
     }
     console.log(this.loginFormGroup.get("loginData")?.value);
+    this.loginService.login(this.username.value, this.password.value).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
   }
 
   /*TODO:
