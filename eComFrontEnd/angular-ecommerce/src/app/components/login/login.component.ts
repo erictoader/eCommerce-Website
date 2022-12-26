@@ -39,4 +39,14 @@ export class LoginComponent implements OnInit{
     }
     console.log(this.loginFormGroup.get("loginData")?.value);
   }
+
+  /*TODO:
+    - create login service
+      - make requests
+      - handle errors
+    - print errors
+    - keep user loged in
+    - display user name in app bar
+    - switch login button with logout button or with account button
+  */
 }
