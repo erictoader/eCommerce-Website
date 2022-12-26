@@ -4,17 +4,27 @@
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
       <a routerLink="/products">
-        <img src="assets/images/logo.png" alt="BestShop" class="img-responsive">
+        <img src="assets/images/logo.jpg" alt="OnlineShop" class="img-responsive">
       </a>
     </div>
     <div class="menu-sidebar-content js-scrollbar1">
       <nav class="navbar-sidebar">
+        <!-- TODO: add filters here-->
         <ul class="list-unstyled navbar-list">
           <li>
-            <a routerLink="/category/1" routerLinkActive="active-link">Books</a>
+            <a routerLink="/products" routerLinkActive="active-link">All Products</a>
           </li>
           <li>
-            <a routerLink="/category/2">Coffee Mugs</a>
+            <!-- TODO: handle this-->
+            <a routerLink="/category/2">Available Products</a>
+          </li>
+          <li>
+            <!-- TODO: handle this-->
+            <a routerLink="/category/2">Sort by Rating</a>
+          </li>
+          <li>
+            <!-- TODO: handle this-->
+            <a routerLink="/category/2">Sort by Price</a>
           </li>
         </ul>
       </nav>
