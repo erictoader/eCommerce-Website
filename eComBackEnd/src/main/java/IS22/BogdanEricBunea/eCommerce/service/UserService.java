@@ -54,4 +54,8 @@ public class UserService {
         return repo.save(updated);
     }
 
+    public User attemptLogin(User user) {
+        return repo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    }
+
 }
