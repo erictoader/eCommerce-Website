@@ -27,7 +27,7 @@ public class UserController {
         return service.getUserByUsername(username);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public UserLoginResponse getUserByUsernameAndPassword(@RequestBody UserLoginRequest request) {
         return service.attemptLogin(request);
     }

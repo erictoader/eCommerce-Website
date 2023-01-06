@@ -22,7 +22,7 @@ public class ProductController {
         return service.getProducts();
     }
 
-    @GetMapping("/getPaginated")
+    @PostMapping("/getPaginated")
     public ProductGetPaginatedResponse getProductsPaginated(@RequestBody ProductGetPaginatedRequest request) {
         return service.getProductsPaginated(request);
     }
