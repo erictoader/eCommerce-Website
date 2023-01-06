@@ -22,37 +22,55 @@ export class ProductService {
             product.image = "data:image/webp;base64," + product.image;
         }    
     }
+
+    handleProductsResponse(response: any){
+        const mapResponse = new Map(Object.entries(response));
+        const products = mapResponse.get("products") as Product[];
+        products.forEach(product => this.handleImage(product));
+        return products;
+    }
     
     getProductList(categoryId: number): Observable<Product[]>{
-        //bogdan: I think we should recieve always a list, even if we get one item or no item at all...
-        const searchUrl = this.baseUrl + (categoryId == 2 ? "/getByName/Sony Turntable - PSLX350H" : "/getAll");
-        return this.httpClient.get<Product[]>(searchUrl).pipe(
-            map(response => {
-                response.forEach(product => this.handleImage(product));
-                return response;
+        const searchUrl = this.baseUrl + "/getAll";
+        return this.httpClient.get<Map<String, any>>(searchUrl).pipe(
+            map(response =>{
+                let products = this.handleProductsResponse(response);
+                let filteredProducts: Product[] = [];
+                switch(categoryId){
+                    //available products
+                    case 2:
+                        filteredProducts = products.filter(p => p.available == 1); 
+                        break;
+                    //sort by rating
+                    case 3:
+                        products.sort((a, b) => a.rating - b.rating);
+                        filteredProducts = products; 
+                        break;
+                    case 4:
+                        products.sort((a, b) => b.rating - a.rating);
+                        filteredProducts = products; 
+                        break;
+                    //sort by price
+                    case 5:
+                        products.sort((a, b) => a.price - b.price);
+                        filteredProducts = products; 
+                        break;
+                    case 6:
+                        products.sort((a, b) => b.price - a.price);
+                        filteredProducts = products; 
+                        break;
+                    default:
+                        return products;
+                }
+                return filteredProducts;
             })
         );
     }
 
-    //bogdan: we should use this
-    //        getByName -> we should use a regex and return all the items matching that
     searchProducts(keyword: String): Observable<Product[]>{
-        const searchUrl = this.baseUrl + `/getByName/${keyword}`;
+        const searchUrl = this.baseUrl + `/searchByName/${keyword}`;
         return this.httpClient.get<Product[]>(searchUrl).pipe(
-            map(response => {
-                response.forEach(product => this.handleImage(product));
-                return response;
-            })
-        );
-    }
-
-      searchSingleProduct(keyword: String): Observable<Product[]>{
-        const searchUrl = this.baseUrl + `/getByName/${keyword}`;
-        return this.httpClient.get<Product>(searchUrl).pipe(
-            map(response => {
-                this.handleImage(response);
-                return [response];
-            })
+            map(response => this.handleProductsResponse(response))
         );
     }
 
@@ -60,8 +78,10 @@ export class ProductService {
         const searchUrl = this.baseUrl + `/getById/${id}`;
         return this.httpClient.get<Product>(searchUrl).pipe(
             map(response => {
-                this.handleImage(response);
-                return response;
+                const mapResponse = new Map(Object.entries(response));
+                const product = mapResponse.get("product");
+                this.handleImage(product);
+                return product;
             })
         );      
     }
