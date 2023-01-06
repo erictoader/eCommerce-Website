@@ -51,5 +51,7 @@ export class LoginComponent implements OnInit{
     - create login service
       - handle errors
     - print errors
+    
+    -redirect user to products page after login
   */
 }
