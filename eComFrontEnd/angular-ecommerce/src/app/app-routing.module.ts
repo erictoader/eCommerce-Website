@@ -5,8 +5,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
+  {path: "register", component: RegisterComponent},
   {path: "login", component: LoginComponent},
 
   {path: "checkout", component: CheckoutComponent},

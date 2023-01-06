@@ -1,0 +1,103 @@
+<div class="main-content page-m">
+    <div class=""section-content section-content-p30>
+        <form [formGroup]="registerFormGroup" (ngSubmit)="onRegister()">
+            <div formGroupName="registerData" class="form-area">
+                <div style="padding-bottom:50px">
+                    <h2>Register</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Name</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="name" type="login-text">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="(name.errors != null && (name.errors['required'] || name.errors['notOnlyWhiteSpace']))">
+                                    Name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="email" type="login-text">
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="(email.errors != null && (email.errors['required'] || email.errors['notOnlyWhiteSpace']))">
+                                    Email is required
+                                </div>
+                                <div *ngIf="(email.errors != null && email.errors['invalid'])">
+                                   Invalid email
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Username</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="username" type="login-text">
+                            <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="(username.errors != null && (username.errors['required'] || username.errors['notOnlyWhiteSpace']))">
+                                    Username is required
+                                </div>
+                                <div *ngIf="(username.errors != null && username.errors['invalid'])">
+                                   Invalid username
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Password</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="password" type="password">
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="(password.errors != null && (password.errors['required'] || password.errors['notOnlyWhiteSpace']))">
+                                    Password is required
+                                </div>
+                                <div *ngIf="(password.errors != null && password.errors['invalid'])">
+                                    Invalid password
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Password Again</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="passwordCheck" type="password">
+                            <div *ngIf="passwordCheck.invalid && (passwordCheck.dirty || passwordCheck.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="(passwordCheck.errors != null && (passwordCheck.errors['required'] || passwordCheck.errors['notOnlyWhiteSpace']))">
+                                    Password is required
+                                </div>
+                                <div *ngIf="(passwordCheck.errors != null && passwordCheck.errors['invalid'])">
+                                    Invalid password
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-info">
+                    Register
+                </button>
+            </div>
+        </form>
+    </div>
+</div> 

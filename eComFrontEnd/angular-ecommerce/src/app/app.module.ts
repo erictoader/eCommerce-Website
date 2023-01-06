@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { AppConfig } from './config/app-config';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AppConfig } from './config/app-config';
     CartDetailsComponent,
     CheckoutComponent,
     LoginComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
