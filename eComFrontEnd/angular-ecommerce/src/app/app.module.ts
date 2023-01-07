@@ -21,6 +21,7 @@ import { AllUsersComponent } from './components/all-users/all-users.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     AllUsersComponent,
     OrdersComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

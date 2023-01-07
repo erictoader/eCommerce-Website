@@ -11,9 +11,11 @@ import { AllUsersComponent } from './components/all-users/all-users.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {path: "add-product", component: AddProductComponent},
+  {path: "user-profile-edit/:username", component: EditProfileComponent},
   {path: "product-edit/:id", component: EditProductComponent},
   {path: "user-profile/:username", component: UserProfileComponent},
   {path: "all-users", component: AllUsersComponent},

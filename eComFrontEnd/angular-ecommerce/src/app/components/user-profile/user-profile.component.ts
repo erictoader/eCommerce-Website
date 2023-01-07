@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -12,7 +12,8 @@ export class UserProfileComponent {
   user!: User;
 
   constructor(private loginService: LoginService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -26,7 +27,7 @@ export class UserProfileComponent {
   }
 
   editAccount(){
-
+    this.router.navigate([`user-profile-edit/${this.user.username}`]);
   }
 
   deleteAccount(){
