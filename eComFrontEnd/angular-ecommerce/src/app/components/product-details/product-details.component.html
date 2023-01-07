@@ -6,6 +6,7 @@
 
             <h3>{{product.name}}</h3>
             <h6> Status: {{product.available == 1 ? "Available": "Not Available"}}</h6>
+            <h6> Rating: {{product.rating}}</h6>
 
             <div class="price">{{product.price | currency:'EUR'}}</div>
             <div *ngIf="product?.available == 1">

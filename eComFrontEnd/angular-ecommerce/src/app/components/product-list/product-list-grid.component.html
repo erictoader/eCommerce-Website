@@ -10,12 +10,16 @@
                         </a>
                         <a routerLink="/products/{{tempProduct.id}}">
                             <h1>{{ tempProduct.name }}</h1>
-                            <h6> 
-                                Status: {{tempProduct.available == 1 ? "Available": "Not Available"}}
-                            </h6>
+                            <h6>Status: {{tempProduct.available == 1 ? "Available": "Not Available"}}</h6>
+                            <h6> Rating: {{tempProduct.rating}}</h6>
                         </a>
                         <div class="price">{{tempProduct.price | currency:'EUR'}}</div>
-                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
+                        <div *ngIf="tempProduct?.available == 1">
+                            <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
+                        </div>
+                        <div *ngIf="tempProduct?.available == 0">
+                            <button class="btn btn-primary btn-sm" disabled>Add to cart</button>
+                        </div>
                     </div>
                 </div>    
                 
