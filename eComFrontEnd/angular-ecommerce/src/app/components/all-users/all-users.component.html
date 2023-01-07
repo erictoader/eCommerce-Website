@@ -26,14 +26,14 @@
                         <td class="align-middle">{{ tempUser.userType }}</td>
                         <td class="align-middle">{{ tempUser.registrationDate }}</td>
                         <td class="align-middle">
-                            <div style="color: green;">
+                            <button style="color: green;" (click)="editAccount(tempUser.username)">
                                 Edit
-                            </div>
+                            </button>
                         </td>
                         <td class="align-middle">
-                            <div style="color: red;">
+                            <button style="color: red;" (click)="deleteAccount(tempUser.id)">
                                 Delete
-                            </div>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
