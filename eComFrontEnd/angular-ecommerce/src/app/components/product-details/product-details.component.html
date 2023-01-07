@@ -5,8 +5,23 @@
             <img src="{{product.image}}" class="detail-img">
 
             <h3>{{product.name}}</h3>
+            <h6> Status: {{product.available == 1 ? "Available": "Not Available"}}</h6>
+
             <div class="price">{{product.price | currency:'EUR'}}</div>
-            <button (click)="addToCart()" class="btn btn-primary btn-sm">Add to cart</button>
+            <div *ngIf="product?.available == 1">
+                <button (click)="addToCart()" class="btn btn-primary btn-sm">Add to cart</button>
+            </div>
+            <div *ngIf="product?.available == 0">
+                <button class="btn btn-primary btn-sm" disabled>Add to cart</button>
+            </div>
+            
+
+            <!-- only admin/seller -->
+            <div style="padding-top: 10px;">
+                <button (click)="editProduct()" class="btn btn-primary btn-sm">Edit</button>
+                <button (click)="deleteProduct()" class="btn btn-primary btn-sm">Delete</button>
+            </div>
+
             <hr>
             <h4>Description</h4>
             <p>{{product.desc}}</p>

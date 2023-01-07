@@ -115,13 +115,13 @@ export class ProductService {
         );
     }
 
-    deleteProduct(id: number): Observable<any> {
-        const deleteUrl = this.baseUrl + `/delete/${id}`;
+    deleteProduct(id: number): Observable<Map<String, any>> {
+        const deleteUrl = this.baseUrl + `/delete?id=${id}`;
         return this.httpClient.delete<Map<String, any>>(deleteUrl).pipe(
             map(response => {
                 console.log(response);
                 const mapResponse = new Map(Object.entries(response));
-                throw new Error("Check this");
+                return mapResponse;
             })
         );      
     }

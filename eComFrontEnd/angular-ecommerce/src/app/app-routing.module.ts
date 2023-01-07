@@ -10,9 +10,11 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 const routes: Routes = [
   {path: "add-product", component: AddProductComponent},
+  {path: "product-edit/:id", component: EditProductComponent},
   {path: "user-profile/:username", component: UserProfileComponent},
   {path: "all-users", component: AllUsersComponent},
   {path: "orders", component: OrdersComponent},

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem } from 'src/app/models/cart-item';
 import { Product } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
@@ -16,7 +16,8 @@ export class ProductDetailsComponent {
 
   constructor(private productService: ProductService,
               private cartService: CartService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private router: Router,) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -37,6 +38,25 @@ export class ProductDetailsComponent {
   addToCart(){
     const cartItem = new CartItem(this.product);
     this.cartService.addToCart(cartItem);
+  }
+
+  editProduct(){
+    const theProductId: number = +this.route.snapshot.paramMap.get("id")!;
+    this.router.navigate([`product-edit/${theProductId}`]);
+  }
+
+  deleteProduct(){
+    const theProductId: number = +this.route.snapshot.paramMap.get("id")!;
+    this.productService.deleteProduct(theProductId).subscribe(
+      data => {
+        console.log(data);
+        if(data.get("code") == 200){
+          this.router.navigate(['home']);
+        } else{
+          //stay on page
+        }
+      }
+    )
   }
 
 }

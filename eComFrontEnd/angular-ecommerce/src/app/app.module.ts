@@ -20,6 +20,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AddProductComponent } from './components/add-product/add-product.compon
     UserProfileComponent,
     AllUsersComponent,
     OrdersComponent,
-    AddProductComponent
+    AddProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
