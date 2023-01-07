@@ -1,0 +1,20 @@
+<div class="main-content-fit">
+    <div class="details-section">
+        <div class="container-fluid">
+
+            <img src="{{user.profilePicture}}" class="detail-img">
+
+            <h3>{{user.name}}</h3>
+            <button (click)="editAccount()" class="btn btn-primary btn-sm">Edit Profile</button>
+            <br>
+            <br>
+            <button (click)="deleteAccount()" class="btn btn-primary btn-sm">Delete Account</button>
+            <hr>
+            <p>Username: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>RegistrationDate: {{user.registrationDate}}</p>
+            <p>UserType: {{user.userType}}</p>
+            <p>Password: {{user.password}}</p>
+        </div>
+    </div>
+</div>

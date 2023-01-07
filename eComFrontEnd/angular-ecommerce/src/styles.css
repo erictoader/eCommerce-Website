@@ -120,11 +120,24 @@ a,a:hover{
     min-height:100vh
 }
 
+.main-content-fit{
+    padding-top:75px;
+    min-height:100vh
+}
+
 aside.menu-sidebar.d-none.d-lg-block.clr{
     background:0 0;
     z-index:99999999;
     height:75px;
     box-shadow:-2px 0 4px #0000003b
+}
+
+/* Divider*/
+
+.divider{
+    background-color: black;
+    height: 2px;
+    width: 100%;
 }
 
 /* 

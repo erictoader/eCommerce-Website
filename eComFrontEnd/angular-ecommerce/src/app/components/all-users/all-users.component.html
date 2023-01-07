@@ -1,0 +1,42 @@
+<div class="main-content-fit">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th></th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>User Type</th>
+                        <th>Registration Date</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+            
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tempUser of users">
+                        <td class="align-middle">
+                            <img src="assets/images/user-placeholder.png" height="100px" width="100px" />
+                        </td>
+                        <td class="align-middle">{{ tempUser.id }}</td>
+                        <td class="align-middle">{{ tempUser.name }}</td>
+                        <td class="align-middle">{{ tempUser.username }}</td>
+                        <td class="align-middle">{{ tempUser.email }}</td>
+                        <td class="align-middle">{{ tempUser.userType }}</td>
+                        <td class="align-middle">{{ tempUser.registrationDate }}</td>
+                        <td class="align-middle">
+                            <div style="color: green;">
+                                Edit
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div style="color: red;">
+                                Delete
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    
+</div>

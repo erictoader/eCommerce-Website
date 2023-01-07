@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginStatusComponent  implements OnInit{
   isAuthenticated: boolean = false;
   userFullName: string = "";
+  username: string = "";
 
   constructor(private loginService: LoginService) { }
 
@@ -27,6 +28,7 @@ export class LoginStatusComponent  implements OnInit{
       if (this.isAuthenticated) {
         let response = this.loginService.getUser() as User;
         this.userFullName = response.name as string;
+        this.username = response.username as string;
       }
     }
 

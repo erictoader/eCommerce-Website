@@ -12,7 +12,16 @@ export class LoginService {
   private currentUser: any = null;
   private baseUrl = AppConfig.baseUrl;
 
-  constructor(private httpClient: HttpClient){
+  constructor(private httpClient: HttpClient){}
+
+  private placeholderImage = "assets/images/user-placeholder.png"; 
+
+  handleImage(user:User){
+    if(user.profilePicture == null){
+      user.profilePicture = this.placeholderImage;
+    }else {
+      user.profilePicture = "data:image/webp;base64," + user.profilePicture;
+    }    
   }
 
   login(username: String, password: String): Observable<Map<String, any>>{
@@ -69,11 +78,14 @@ export class LoginService {
     });
   }
 
-  getAllUsers(id: number):Observable<User[]>{
+  getAllUsers():Observable<User[]>{
     const getAllUrl = this.baseUrl + "user/getAll";
     return this.httpClient.get<Map<String, any>>(getAllUrl).pipe(
       map(response => {
-        throw new Error("Check this")
+        // throw new Error("Check this")
+        console.log(response);
+        const responseMap = new Map(Object.entries(response));
+        return responseMap.get("users");
       })
     );
   }
@@ -82,7 +94,12 @@ export class LoginService {
     const getUserUrl = this.baseUrl + `user/getByUsername/${username}`;
     return this.httpClient.get<Map<String, any>>(getUserUrl).pipe(
       map(response => {
-        throw new Error("Check this")
+        // throw new Error("Check this")
+        console.log(response);
+        const responseMap = new Map(Object.entries(response));
+        const user = responseMap.get("user");
+        this.handleImage(user);
+        return user;
       })
     );
   }
@@ -91,6 +108,7 @@ export class LoginService {
     const deleteUrl = this.baseUrl + `user/delete/${id}`;
     return this.httpClient.delete<Map<String, any>>(deleteUrl).pipe(
       map(response => {
+        console.log(response);
         throw new Error("Check this")
       })
     );
@@ -109,6 +127,7 @@ export class LoginService {
       }
     ).pipe(
       map(response => {
+        console.log(response);
         throw new Error("Check this")
       })
     );

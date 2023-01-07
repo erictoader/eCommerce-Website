@@ -16,6 +16,10 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { AppConfig } from './config/app-config';
 import { RegisterComponent } from './components/register/register.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AllUsersComponent } from './components/all-users/all-users.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
 
 
 @NgModule({
@@ -29,7 +33,11 @@ import { RegisterComponent } from './components/register/register.component';
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserProfileComponent,
+    AllUsersComponent,
+    OrdersComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
