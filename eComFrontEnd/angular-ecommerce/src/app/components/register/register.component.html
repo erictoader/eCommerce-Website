@@ -26,12 +26,15 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-space">
-                            <input formControlName="email" type="login-text">
+                            <input formControlName="email" type="login-text" ngModel email (keydown.space)="$event.preventDefault();">
                             <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1">
                                 <div *ngIf="(email.errors != null && (email.errors['required'] || email.errors['notOnlyWhiteSpace']))">
                                     Email is required
                                 </div>
-                                <div *ngIf="(email.errors != null && email.errors['invalid'])">
+                                <div *ngIf="(email.errors != null && email.errors['noWhiteSpace'])">
+                                    Email can not contain white spaces
+                                </div>
+                                <div *ngIf="(email.errors != null && (email.errors['invalid'] || email.errors['email']))">
                                    Invalid email
                                 </div>
                             </div>
@@ -44,10 +47,13 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-space">
-                            <input formControlName="username" type="login-text">
+                            <input formControlName="username" type="login-text" (keydown.space)="$event.preventDefault();">
                             <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger mt-1">
                                 <div *ngIf="(username.errors != null && (username.errors['required'] || username.errors['notOnlyWhiteSpace']))">
                                     Username is required
+                                </div>
+                                <div *ngIf="(username.errors != null && username.errors['noWhiteSpace'])">
+                                    Username can not contain white spaces
                                 </div>
                                 <div *ngIf="(username.errors != null && username.errors['invalid'])">
                                    Invalid username
@@ -62,10 +68,13 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-space">
-                            <input formControlName="password" type="password">
+                            <input formControlName="password" type="password" (keydown.space)="$event.preventDefault();">
                             <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1">
                                 <div *ngIf="(password.errors != null && (password.errors['required'] || password.errors['notOnlyWhiteSpace']))">
                                     Password is required
+                                </div>
+                                <div *ngIf="(password.errors != null && password.errors['noWhiteSpace'])">
+                                    Password can not contain white spaces
                                 </div>
                                 <div *ngIf="(password.errors != null && password.errors['invalid'])">
                                     Invalid password
@@ -80,10 +89,13 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-space">
-                            <input formControlName="passwordCheck" type="password">
+                            <input formControlName="passwordCheck" type="password" (keydown.space)="$event.preventDefault();">
                             <div *ngIf="passwordCheck.invalid && (passwordCheck.dirty || passwordCheck.touched)" class="alert alert-danger mt-1">
                                 <div *ngIf="(passwordCheck.errors != null && (passwordCheck.errors['required'] || passwordCheck.errors['notOnlyWhiteSpace']))">
                                     Password is required
+                                </div>
+                                <div *ngIf="(password.errors != null && password.errors['noWhiteSpace'])">
+                                    Password can not contain white spaces
                                 </div>
                                 <div *ngIf="(passwordCheck.errors != null && passwordCheck.errors['invalid'])">
                                     Invalid password
@@ -92,6 +104,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div *ngIf="errorToDisplay?.length != 0" class="alert alert-warning col-md-12" role="alert">
+                {{errorToDisplay}}
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-info">

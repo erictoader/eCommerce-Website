@@ -33,12 +33,12 @@ export class CheckoutComponent implements OnInit {
 
         firstName: new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
+          AppValidators.min2Length,
           AppValidators.notOnlyWhiteSpace]),
 
         lastName: new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
+          AppValidators.min2Length,
           AppValidators.notOnlyWhiteSpace]),
 
         email: new FormControl("", [
@@ -49,42 +49,41 @@ export class CheckoutComponent implements OnInit {
       shippingAddress: this.formBuilder.group({
         street: new FormControl("", [
           Validators.required, 
-          AppValidators.minLength, 
+          AppValidators.min2Length, 
           AppValidators.notOnlyWhiteSpace]),
 
         city: new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
+          AppValidators.min2Length,
           AppValidators.notOnlyWhiteSpace]),
 
         country: new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
+          AppValidators.min2Length,
           AppValidators.notOnlyWhiteSpace]),
           
         zipCode: new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
           AppValidators.notOnlyWhiteSpace]),
       }),
 
       billingAddress: this.formBuilder.group({
         street: new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
+          AppValidators.min2Length,
           AppValidators.notOnlyWhiteSpace]),
 
         city:new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
+          AppValidators.min2Length,
           AppValidators.notOnlyWhiteSpace]),
 
         country: new FormControl("", [
-          Validators.required]),
+          Validators.required,
+          AppValidators.min2Length]),
 
         zipCode: new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
           AppValidators.notOnlyWhiteSpace]),
       }),
 
@@ -93,7 +92,7 @@ export class CheckoutComponent implements OnInit {
           Validators.required,]),
         nameOnCard: new FormControl("", [
           Validators.required,
-          AppValidators.minLength,
+          AppValidators.min2Length,
           AppValidators.notOnlyWhiteSpace]),
         cardNumber: new FormControl("", [
           Validators.required, 

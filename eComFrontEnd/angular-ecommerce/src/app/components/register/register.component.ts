@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { AppValidators } from 'src/app/validators/app-validators';
 
@@ -11,10 +12,12 @@ import { AppValidators } from 'src/app/validators/app-validators';
 export class RegisterComponent implements OnInit{
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private loginService: LoginService,
   ){}
 
+  errorToDisplay: String = "";
   registerFormGroup: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
@@ -22,18 +25,24 @@ export class RegisterComponent implements OnInit{
       registerData: this.formBuilder.group({
         name: new FormControl("",[
           Validators.required,
+          AppValidators.notOnlyWhiteSpace,
         ]),
         email: new FormControl("",[
           Validators.required,
+          Validators.email,
+          AppValidators.noWhiteSpace,
         ]),
         username: new FormControl("",[
           Validators.required,
+          AppValidators.noWhiteSpace,
         ]),
         password: new FormControl("",[
           Validators.required,
+          AppValidators.noWhiteSpace,
         ]),
         passwordCheck: new FormControl("",[
           Validators.required,
+          AppValidators.noWhiteSpace,
         ]),
       })
     });
@@ -46,21 +55,28 @@ export class RegisterComponent implements OnInit{
   get passwordCheck() {return this.registerFormGroup.get("registerData.passwordCheck")!;}
 
   onRegister() {
-    console.log("Handle register button");
     if (this.registerFormGroup.invalid){
       this.registerFormGroup.markAllAsTouched();
     } else {
-      console.log(this.registerFormGroup.get("registerData")?.value);
-      this.loginService.register(
-        this.username.value, 
-        this.password.value,
-        this.name.value,
-        this.email.value
-        ).subscribe(
-        data => {
-          console.log(`register response ==> ${data}`);
-        }
-      );
+      if(this.password.value != this.passwordCheck.value){
+        this.errorToDisplay = "Passwords do not match!";
+      } else {
+        this.loginService.register(
+          this.username.value, 
+          this.password.value,
+          this.name.value,
+          this.email.value
+          ).subscribe(
+            data => {
+              if(data.get("code") != 200){
+                this.errorToDisplay = data.get("message");
+              }else{
+                this.errorToDisplay = "";
+                this.router.navigate(['home']);
+              }
+            }
+        );
+      }
     }
   }
 }

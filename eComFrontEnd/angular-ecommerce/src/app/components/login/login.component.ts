@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { AppValidators } from 'src/app/validators/app-validators';
 
@@ -11,10 +12,12 @@ import { AppValidators } from 'src/app/validators/app-validators';
 export class LoginComponent implements OnInit{
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private loginService: LoginService,
   ){}
-
+  
+  errorToDisplay: String = "";
   loginFormGroup: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
@@ -22,9 +25,11 @@ export class LoginComponent implements OnInit{
       loginData: this.formBuilder.group({
         username: new FormControl("",[
           Validators.required,
+          AppValidators.noWhiteSpace,
         ]),
         password: new FormControl("",[
           Validators.required,
+          AppValidators.noWhiteSpace,
         ]),
       })
     });
@@ -34,24 +39,19 @@ export class LoginComponent implements OnInit{
   get password() {return this.loginFormGroup.get("loginData.password")!;}
 
   onLogin() {
-    console.log("Handle login button");
-
     if (this.loginFormGroup.invalid){
       this.loginFormGroup.markAllAsTouched();
+    }else{ 
+      this.loginService.login(this.username.value, this.password.value).subscribe(
+        data => {
+          if(data.get("code") != 200){
+            this.errorToDisplay = data.get("message");
+          }else{
+            this.errorToDisplay = "";
+            this.router.navigate(['home']);
+          }
+        }
+      );
     }
-    console.log(this.loginFormGroup.get("loginData")?.value);
-    this.loginService.login(this.username.value, this.password.value).subscribe(
-      data => {
-        console.log(data);
-      }
-    );
   }
-
-  /*TODO:
-    - create login service
-      - handle errors
-    - print errors
-    
-    -redirect user to products page after login
-  */
 }

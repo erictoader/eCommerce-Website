@@ -16,28 +16,25 @@ export class LoginService {
     console.log(`currentUser = ${this.currentUser}`);
   }
 
-  login(username: String, password: String): Observable<User>{
+  login(username: String, password: String): Observable<Map<String, any>>{
     console.log(`Login request: ${username}, ${password}`);
     const loginUrl = this.baseUrl + "user/login";
-    return this.httpClient.request<User>(
+    return this.httpClient.request<Map<String, any>>(
       "POST",
       loginUrl, 
-     {
-      body:  {username: username, password: password},
-    }
-      ).pipe(
+      {
+        body:  {username: username, password: password},
+      }
+    ).pipe(
       map(response => {
-        console.log("Login response:");
-        console.log(response);
         const responseMap = new Map(Object.entries(response));
-        const user = responseMap.get("user") as User;
-        this.currentUser = user;
-        return user;
+        this.currentUser = responseMap.get("user");
+        return responseMap;
       })
     )
   }
 
-  register(_username: String, _password: String, _name: String, _email: String): Observable<User>{
+  register(_username: String, _password: String, _name: String, _email: String): Observable<Map<String, any>>{
     const registerUrl = this.baseUrl + "user/register";
     return this.httpClient.request<Map<String, any>>(
       "POST",
@@ -53,11 +50,8 @@ export class LoginService {
       ).pipe(
       map(response => {
         const responseMap = new Map(Object.entries(response));
-        const user = responseMap.get("user") as User;
-        console.log("Register response:");
-        console.log(response);
-        this.currentUser = user;
-        return user;
+        this.currentUser = responseMap.get("user");
+        return responseMap;
       })
     )
   }
