@@ -1,7 +1,38 @@
-<div class="main-content">
-    <div class="selection-contetnt selection-content-p30">
-        <div class="container-fluid">
-            <p>orders works!</p>
-        </div>
-    </div>
+<div class="main-content-fit">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Buyer Username</th>
+                <th>Buyer Address</th>
+                <th>Order Date</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+    
+        </thead>
+        <tbody>
+            <tr *ngFor="let tempOrder of orders">
+                <!-- <td class="align-middle">
+                    <img src="assets/images/user-placeholder.png" height="100px" width="100px" />
+                </td> -->
+                <td class="align-middle">{{ tempOrder.id }}</td>
+                <td class="align-middle">{{ tempOrder.buyerUsername }}</td>
+                <td class="align-middle">{{ tempOrder.buyerAddress }}</td>
+                <td class="align-middle">{{ tempOrder.orderDate }}</td>
+                <td class="align-middle">{{ tempOrder.total }}</td>
+                <td class="align-middle">
+                    <div style="color: green;">
+                        Details
+                    </div>
+                </td>
+                <td class="align-middle">
+                    <div style="color: red;">
+                        Delete
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>

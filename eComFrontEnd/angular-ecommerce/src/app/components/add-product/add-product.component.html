@@ -1,7 +1,100 @@
 <div class="main-content">
     <div class="selection-contetnt selection-content-p30">
         <div class="container-fluid">
-            <p>add-product works!</p>
+            <form [formGroup]="addProductFormGroup" (ngSubmit)="onSubmit()">
+                <div formGroupName="product" class="form-area">
+                    <div style="padding-bottom:50px">
+                        <h2>Product</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Name</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="name" type="text">
+                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger mt-1">
+                                    <div *ngIf="(name.errors != null && (name.errors['required'] || name.errors['notOnlyWhiteSpace']))">
+                                        Name is required
+                                    </div>
+                                    <div *ngIf="(name.errors != null && name.errors['minLength'])">
+                                        Name must be at least 2 characters long
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Description</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="desc" type="text">
+                                <div *ngIf="desc.invalid && (desc.dirty || desc.touched)" class="alert alert-danger mt-1">
+                                    <div *ngIf="(desc.errors != null && (desc.errors['required'] || desc.errors['notOnlyWhiteSpace']))">
+                                        Description is required
+                                    </div>
+                                    <div *ngIf="(desc.errors != null && desc.errors['minLength'])">
+                                        Description must be at least 2 characters long
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Price</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="price" type="text">
+                                <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger mt-1">
+                                    <div *ngIf="(price.errors != null && price.errors['required'])">
+                                        Price is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Status</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="expirationMonth">
+                                    <option>available</option>
+                                    <option>not available</option>
+                                </select>
+                                <div *ngIf="available.invalid && (available.dirty || available.touched)" class="alert alert-danger mt-1">
+                                    <div *ngIf="(available.errors != null && available.errors['required'])">
+                                        Status is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Image</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="image" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info">
+                        Publish
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

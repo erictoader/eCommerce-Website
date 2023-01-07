@@ -17,7 +17,9 @@ export class OrdersService {
     return this.httpClient.get<Map<String, any>>(getAllOrdersUrl).pipe(
         map(response => {
           console.log(response);
-          throw new Error("Check this");
+          const mapResponse = new Map(Object.entries(response));
+          return mapResponse.get("orders");
+          // throw new Error("Check this");
       })
     );
 }
