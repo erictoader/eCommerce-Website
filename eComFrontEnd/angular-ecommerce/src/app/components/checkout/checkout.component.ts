@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
+import { OrdersService } from 'src/app/services/orders.service';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 import { AppValidators } from 'src/app/validators/app-validators';
 
@@ -21,7 +22,9 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private shopFormService: ShopFormService,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private ordersService: OrdersService,
+    ) {
   }
 
   ngOnInit(): void {
@@ -182,13 +185,13 @@ export class CheckoutComponent implements OnInit {
 
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
-    }
+    }else{
+      console.log(this.checkoutFormGroup.get("customer")?.value);
 
-    console.log(this.checkoutFormGroup.get("customer")?.value);
+    }
   }
 
   //bogdan TODOs:
   //Sections:
-  //  22->review cart totals
   //  24->save the order to DB
 }

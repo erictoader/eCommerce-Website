@@ -29,48 +29,51 @@ export class ProductService {
         products.forEach(product => this.handleImage(product));
         return products;
     }
+
+    filterProducts(categoryId: number, response: any){
+        let products = this.handleProductsResponse(response);
+        let filteredProducts: Product[] = [];
+        switch(categoryId){
+            //available products
+            case 2:
+                filteredProducts = products.filter(p => p.available == 1); 
+                break;
+            //sort by rating
+            case 3:
+                products.sort((a, b) => a.rating - b.rating);
+                filteredProducts = products; 
+                break;
+            case 4:
+                products.sort((a, b) => b.rating - a.rating);
+                filteredProducts = products; 
+                break;
+            //sort by price
+            case 5:
+                products.sort((a, b) => a.price - b.price);
+                filteredProducts = products; 
+                break;
+            case 6:
+                products.sort((a, b) => b.price - a.price);
+                filteredProducts = products; 
+                break;
+            default:
+                return products;
+        }
+        return filteredProducts;
+    }
     
     getProductList(categoryId: number): Observable<Product[]>{
         const searchUrl = this.baseUrl + "/getAll";
         return this.httpClient.get<Map<String, any>>(searchUrl).pipe(
-            map(response =>{
-                let products = this.handleProductsResponse(response);
-                let filteredProducts: Product[] = [];
-                switch(categoryId){
-                    //available products
-                    case 2:
-                        filteredProducts = products.filter(p => p.available == 1); 
-                        break;
-                    //sort by rating
-                    case 3:
-                        products.sort((a, b) => a.rating - b.rating);
-                        filteredProducts = products; 
-                        break;
-                    case 4:
-                        products.sort((a, b) => b.rating - a.rating);
-                        filteredProducts = products; 
-                        break;
-                    //sort by price
-                    case 5:
-                        products.sort((a, b) => a.price - b.price);
-                        filteredProducts = products; 
-                        break;
-                    case 6:
-                        products.sort((a, b) => b.price - a.price);
-                        filteredProducts = products; 
-                        break;
-                    default:
-                        return products;
-                }
-                return filteredProducts;
-            })
+            map(response => this.filterProducts(categoryId, response))
         );
     }
+    
 
-    searchProducts(keyword: String): Observable<Product[]>{
-        const searchUrl = this.baseUrl + `/searchByName/${keyword}`;
-        return this.httpClient.get<Product[]>(searchUrl).pipe(
-            map(response => this.handleProductsResponse(response))
+    getPaginatedProductList(categoryId: number, _page: number): Observable<Product[]>{
+        const searchUrl = this.baseUrl + "/getPaginated";
+        return this.httpClient.post<Map<String, any>>(searchUrl, {page: _page, quantity: 20}).pipe(
+            map(response => this.filterProducts(categoryId, response))
         );
     }
 
@@ -85,4 +88,61 @@ export class ProductService {
             })
         );      
     }
+
+    searchProducts(keyword: String): Observable<Product[]>{
+        const searchUrl = this.baseUrl + `/searchByName/${keyword}`;
+        return this.httpClient.get<Product[]>(searchUrl).pipe(
+            map(response => this.handleProductsResponse(response))
+        );
+    }
+
+    addProduct(product:Product): Observable<Product>{
+        const addUrl = this.baseUrl + "/add";
+        return this.httpClient.post<Map<String, any>>(
+            addUrl, 
+            {
+                name: product.name,
+                desc: product.desc,
+                price: product.price,
+                available: product.available,
+                image: product.image,
+            }
+            ).pipe(
+            map(response => {
+                console.log(response);
+                throw new Error("Check this");
+            })
+        );
+    }
+
+    deleteProduct(id: number): Observable<any> {
+        const deleteUrl = this.baseUrl + `/delete/${id}`;
+        return this.httpClient.delete<Map<String, any>>(deleteUrl).pipe(
+            map(response => {
+                console.log(response);
+                const mapResponse = new Map(Object.entries(response));
+                throw new Error("Check this");
+            })
+        );      
+    }
+
+    updateProduct(product:Product): Observable<Product>{
+        const updateUrl = this.baseUrl + "/update";
+        return this.httpClient.put<Map<String, any>>(
+            updateUrl, 
+            {
+                name: product.name,
+                desc: product.desc,
+                price: product.price,
+                available: product.available,
+                image: product.image,
+            }
+            ).pipe(
+            map(response => {
+                console.log(response);
+                throw new Error("Check this");
+            })
+        );
+    }
+ 
 }

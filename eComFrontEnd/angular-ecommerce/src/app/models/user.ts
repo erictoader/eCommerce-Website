@@ -7,5 +7,6 @@ export class User {
         public userType: number,
         public profilePicture: String,
         public registrationDate: number,
+        public email: String
     ){}
 }

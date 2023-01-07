@@ -13,11 +13,9 @@ export class LoginService {
   private baseUrl = AppConfig.baseUrl;
 
   constructor(private httpClient: HttpClient){
-    console.log(`currentUser = ${this.currentUser}`);
   }
 
   login(username: String, password: String): Observable<Map<String, any>>{
-    console.log(`Login request: ${username}, ${password}`);
     const loginUrl = this.baseUrl + "user/login";
     return this.httpClient.request<Map<String, any>>(
       "POST",
@@ -69,5 +67,50 @@ export class LoginService {
     return new Observable(observer => {
       setInterval(() => observer.next(this.currentUser != null), 1000);
     });
+  }
+
+  getAllUsers(id: number):Observable<User[]>{
+    const getAllUrl = this.baseUrl + "user/getAll";
+    return this.httpClient.get<Map<String, any>>(getAllUrl).pipe(
+      map(response => {
+        throw new Error("Check this")
+      })
+    );
+  }
+
+  getByUsername(username: string):Observable<User>{
+    const getUserUrl = this.baseUrl + `user/getByUsername/${username}`;
+    return this.httpClient.get<Map<String, any>>(getUserUrl).pipe(
+      map(response => {
+        throw new Error("Check this")
+      })
+    );
+  }
+
+  deleteUser(id: number):Observable<boolean>{
+    const deleteUrl = this.baseUrl + `user/delete/${id}`;
+    return this.httpClient.delete<Map<String, any>>(deleteUrl).pipe(
+      map(response => {
+        throw new Error("Check this")
+      })
+    );
+  }
+
+  updateUser(user: User):Observable<User>{
+    const updateUrl = this.baseUrl + "user/update";
+    return this.httpClient.put<Map<String, any>>(
+      updateUrl,
+      {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        profilePicture: user.profilePicture,
+      }
+    ).pipe(
+      map(response => {
+        throw new Error("Check this")
+      })
+    );
   }
 }
