@@ -17,6 +17,9 @@ public class OrderAddRequest {
         this.items = items;
     }
 
+    public OrderAddRequest() {
+    }
+
     public String getUsername() {
         return username;
     }
