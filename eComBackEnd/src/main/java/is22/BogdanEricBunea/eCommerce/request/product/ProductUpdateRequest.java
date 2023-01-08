@@ -17,6 +17,9 @@ public class ProductUpdateRequest {
         this.image = image;
     }
 
+    public ProductUpdateRequest() {
+    }
+
     public int getId() {
         return id;
     }

@@ -15,6 +15,9 @@ public class ProductAddRequest {
         this.image = image;
     }
 
+    public ProductAddRequest() {
+    }
+
     public String getName() {
         return name;
     }

@@ -9,6 +9,10 @@ public class ProductGetPaginatedRequest {
         this.quantity = quantity;
     }
 
+    public ProductGetPaginatedRequest() {
+
+    }
+
     public int getPage() {
         return page;
     }
