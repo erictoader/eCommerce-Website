@@ -7,7 +7,6 @@ import java.util.Arrays;
 @Table(name = "PRODUCTS")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String desc;
@@ -92,6 +91,10 @@ public class Product {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public boolean isAvailable() {
+        return available;
     }
 
     @Override

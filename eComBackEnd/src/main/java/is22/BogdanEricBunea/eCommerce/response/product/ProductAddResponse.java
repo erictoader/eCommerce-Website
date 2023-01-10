@@ -1,22 +1,11 @@
 package is22.BogdanEricBunea.eCommerce.response.product;
 
-import is22.BogdanEricBunea.eCommerce.entity.Product;
 import is22.BogdanEricBunea.eCommerce.response.BaseResponse;
 
 public class ProductAddResponse extends BaseResponse {
-    private Product product;
 
-    public ProductAddResponse(Integer code, String message, Product product) {
+    public ProductAddResponse(Integer code, String message) {
         super(code, message);
-        this.product = product;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public interface Codes {

@@ -91,26 +91,24 @@ public class ProductService {
     public ProductAddResponse saveProduct(ProductAddRequest request) {
         if (request.getName().isBlank() || request.getName().isEmpty()) return new ProductAddResponse(
                 ProductAddResponse.Codes.NAME_EMPTY,
-                ProductAddResponse.Messages.NAME_EMPTY,
-                null
+                ProductAddResponse.Messages.NAME_EMPTY
         );
         if (request.getPrice() == 0f) return new ProductAddResponse(
                 ProductAddResponse.Codes.PRICE_ZERO,
-                ProductAddResponse.Messages.PRICE_ZERO,
-                null
+                ProductAddResponse.Messages.PRICE_ZERO
         );
-        Product product = repo.save(new Product(
+
+        repo.insert(
                 request.getName(),
                 request.getDesc(),
                 request.getPrice(),
                 request.isAvailable(),
                 request.getImage(),
-                0f)
+                0f
         );
         return new ProductAddResponse(
                 ProductAddResponse.Codes.SUCCESS,
-                ProductAddResponse.Messages.SUCCESS,
-                product
+                ProductAddResponse.Messages.SUCCESS
         );
     }
 
@@ -152,11 +150,20 @@ public class ProductService {
         existing.setImage(request.getImage());
         existing.setPrice(request.getPrice());
 
-        Product updated = repo.save(existing);
+        repo.deleteById(existing.getId());
+        repo.insert(
+                Integer.toUnsignedLong(existing.getId()),
+                existing.getName(),
+                existing.getDesc(),
+                existing.getPrice(),
+                existing.isAvailable(),
+                existing.getImage(),
+                existing.getRating()
+        );
         return new ProductUpdateResponse(
                 ProductUpdateResponse.Codes.SUCCESS,
                 ProductUpdateResponse.Messages.SUCCESS,
-                updated
+                existing
         );
     }
 }
