@@ -18,6 +18,8 @@ export class EditProductComponent implements OnInit{
     private route: ActivatedRoute,
   ) {}
 
+  get theProductId(){return +this.route.snapshot.paramMap.get("id")!}
+
   ngOnInit(): void {
     this.addProductFormGroup = this.formBuilder.group({
       product: this.formBuilder.group({
@@ -30,8 +32,7 @@ export class EditProductComponent implements OnInit{
         rating: new FormControl("", []),
       }),
     });
-    const theProductId: number = +this.route.snapshot.paramMap.get("id")!;
-    this.productService.getProduct(theProductId).subscribe(
+    this.productService.getProduct(this.theProductId).subscribe(
       data => {
         console.log(data.name);
         this.product = data;
@@ -59,6 +60,19 @@ export class EditProductComponent implements OnInit{
     if (this.addProductFormGroup.invalid) {
       this.addProductFormGroup.markAllAsTouched();
     }else{
+      this.productService.updateProduct(new Product(
+        this.theProductId,
+        this.name.value,
+        this.desc.value,
+        this.price.value,
+        1,
+        null,
+        this.rating.value,
+      )).subscribe(
+        data => {
+          console.log(data);
+        }
+      )
       console.log(this.addProductFormGroup.get("product")?.value);
 
     }

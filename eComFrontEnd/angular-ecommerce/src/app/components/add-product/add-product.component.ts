@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -43,6 +44,19 @@ export class AddProductComponent implements OnInit {
     if (this.addProductFormGroup.invalid) {
       this.addProductFormGroup.markAllAsTouched();
     }else{
+      this.productService.addProduct(new Product(
+        0,
+        this.name.value,
+        this.desc.value,
+        this.price.value,
+        1,
+        null,
+        this.rating.value,
+      )).subscribe(
+        data => {
+          console.log(data);
+        }
+      )
       console.log(this.addProductFormGroup.get("product")?.value);
 
     }

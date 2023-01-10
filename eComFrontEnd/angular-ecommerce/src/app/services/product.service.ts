@@ -110,7 +110,9 @@ export class ProductService {
             ).pipe(
             map(response => {
                 console.log(response);
-                throw new Error("Check this");
+                const mapResponse = new Map(Object.entries(response));
+                return mapResponse.get("product");
+                // throw new Error("Check this");
             })
         );
     }
@@ -131,6 +133,7 @@ export class ProductService {
         return this.httpClient.put<Map<String, any>>(
             updateUrl, 
             {
+                id: product.id,
                 name: product.name,
                 desc: product.desc,
                 price: product.price,

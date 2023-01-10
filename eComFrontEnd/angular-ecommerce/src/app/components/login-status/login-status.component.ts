@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -13,7 +14,8 @@ export class LoginStatusComponent  implements OnInit{
   userFullName: string = "";
   username: string = "";
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,
+              private router: Router) { }
 
     ngOnInit(): void {
       this.loginService.authState().subscribe(
@@ -35,6 +37,7 @@ export class LoginStatusComponent  implements OnInit{
     logout() {
       if(this.isAuthenticated){
         this.loginService.signOut();
+        this.router.navigate(['home']);
       }
     }
 }

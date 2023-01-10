@@ -5,7 +5,7 @@ export class User {
         public username: String,
         public password: String,
         public userType: number,
-        public profilePicture: String,
+        public profilePicture: String | null,
         public registrationDate: number,
         public email: String
     ){}

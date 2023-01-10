@@ -15,6 +15,10 @@ export class AllUsersComponent implements OnInit {
     private router: Router,) { }
 
     ngOnInit(): void {
+      this.loadUsers();
+    }
+
+    loadUsers(){
       this.loginService.getAllUsers().subscribe(
         response =>{
           this.users = response;
@@ -28,8 +32,9 @@ export class AllUsersComponent implements OnInit {
     deleteAccount(userId: number){
       this.loginService.deleteUser(userId).subscribe(
         data =>{
-          console.log(`detele user with id ${userId}`);
-          console.log(data);
+          if(data == true){
+            this.loadUsers();
+          }
         }
       );
     }

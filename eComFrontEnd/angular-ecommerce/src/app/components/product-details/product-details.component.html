@@ -18,7 +18,7 @@
             
 
             <!-- only admin/seller -->
-            <div style="padding-top: 10px;">
+            <div  *ngIf="isAdmin" style="padding-top: 10px;">
                 <button (click)="editProduct()" class="btn btn-primary btn-sm">Edit</button>
                 <button (click)="deleteProduct()" class="btn btn-primary btn-sm">Delete</button>
             </div>
