@@ -194,10 +194,8 @@ export class CheckoutComponent implements OnInit {
       let order = new Order(
         0, 
         this.email.value,
-        this.shippingAddressCountry.value + ";" +
-          this.shippingAddressCity.value + ";" +
-          this.shippingAddressStreet.value + ";" +
-          this.shippingAddressZipCode.value,
+        this.shippingAddressCity.value + ", " +
+          this.shippingAddressStreet.value + ", ",
         new Date(),
         this.totalPrice,
         this.cartService.cartItems.map( cartItem => {
