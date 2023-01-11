@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -10,9 +11,11 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AddProductComponent implements OnInit {
  
+  displayError: String = "";
   addProductFormGroup: FormGroup = new FormGroup({});
   constructor(private formBuilder: FormBuilder,
     private productService: ProductService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +58,11 @@ export class AddProductComponent implements OnInit {
       )).subscribe(
         data => {
           console.log(data);
+          if (data.get("code") == 200){
+            this.router.navigate(['home']);
+          } else {
+            this.displayError = data.get("message");
+          }
         }
       )
       console.log(this.addProductFormGroup.get("product")?.value);

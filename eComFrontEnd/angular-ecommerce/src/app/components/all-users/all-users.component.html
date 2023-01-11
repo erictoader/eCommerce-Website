@@ -23,7 +23,9 @@
                         <td class="align-middle">{{ tempUser.name }}</td>
                         <td class="align-middle">{{ tempUser.username }}</td>
                         <td class="align-middle">{{ tempUser.email }}</td>
-                        <td class="align-middle">{{ tempUser.userType }}</td>
+                        <td class="align-middle" *ngIf ="tempUser.userType == 0">Admin</td>
+                        <td class="align-middle" *ngIf ="tempUser.userType == 1">Customer</td>
+                        <td class="align-middle" *ngIf ="tempUser.userType == 2">Seller</td>
                         <td class="align-middle">{{ tempUser.registrationDate }}</td>
                         <td class="align-middle">
                             <button style="color: green;" (click)="editAccount(tempUser.username)">

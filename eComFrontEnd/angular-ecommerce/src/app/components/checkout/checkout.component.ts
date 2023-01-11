@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/models/order';
 import { OrderItem } from 'src/app/models/order-item';
 import { CartService } from 'src/app/services/cart.service';
@@ -26,6 +27,7 @@ export class CheckoutComponent implements OnInit {
     private shopFormService: ShopFormService,
     private cartService: CartService,
     private ordersService: OrdersService,
+    private router: Router,
     ) {
   }
 
@@ -184,17 +186,17 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit() {
     console.log("Handling the submit button");
-
-    if (this.checkoutFormGroup.invalid && false) {
-      // this.checkoutFormGroup.markAllAsTouched();
+    //remove false
+    if (this.checkoutFormGroup.invalid) {
+      this.checkoutFormGroup.markAllAsTouched();
     }else{
       console.log(this.checkoutFormGroup.get("customer")?.value);
       let order = new Order(
         0, 
         this.email.value,
-        this.shippingAddressCountry.value + ", " +
-          this.shippingAddressCity.value + ", " +
-          this.shippingAddressStreet.value + ", " +
+        this.shippingAddressCountry.value + ";" +
+          this.shippingAddressCity.value + ";" +
+          this.shippingAddressStreet.value + ";" +
           this.shippingAddressZipCode.value,
         new Date(),
         this.totalPrice,
@@ -205,12 +207,11 @@ export class CheckoutComponent implements OnInit {
       this.ordersService.placeOrder(order).subscribe(
         data=>{
           console.log(`${data}`);
+          if(data.get("code") == 200){
+            this.router.navigate(["home"]);
+          }
         }
       );
     }
   }
-
-  //bogdan TODOs:
-  //Sections:
-  //  24->save the order to DB
 }

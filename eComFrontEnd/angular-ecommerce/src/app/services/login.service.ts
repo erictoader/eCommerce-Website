@@ -139,6 +139,7 @@ export class LoginService {
         id: user.id,
         name: user.name,
         email: user.email,
+        userType: user.userType,
         password: user.password,
         profilePicture: user.profilePicture,
       }

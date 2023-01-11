@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -16,6 +16,7 @@ export class EditProfileComponent implements OnInit{
   constructor(private formBuilder: FormBuilder,
     private loginService: LoginService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     this._user = null;
   }
@@ -37,7 +38,6 @@ export class EditProfileComponent implements OnInit{
         this._user = data;
         this.name.setValue(this._user!.name);
         this.email.setValue(this._user!.email);
-        this.userType.setValue(this._user!.userType);
         this.profilePicture.setValue(this._user!.profilePicture);
         this.password.setValue(this._user!.password);
       }
@@ -49,7 +49,6 @@ export class EditProfileComponent implements OnInit{
   get name() { return this.editProfileFormGroup.get("user.name")!; }
   get password() { return this.editProfileFormGroup.get("user.password")!; }
   get email() { return this.editProfileFormGroup.get("user.email")!; }
-  get userType() { return this.editProfileFormGroup.get("user.userType")!; }
   get profilePicture() { return this.editProfileFormGroup.get("user.profilePicture")!; }
 
   
@@ -63,13 +62,13 @@ export class EditProfileComponent implements OnInit{
         this.name.value,
         this._user!.username,
         this.password.value,
-        this.userType.value,
+        this._user!.userType,
         null, // this._user?.profilePicture
         this._user!.registrationDate,
         this.email.value
 
       )).subscribe(data => {
-        
+        this.router.navigate(["home"]);
       })
       console.log(this.editProfileFormGroup.get("user")?.value);
     }

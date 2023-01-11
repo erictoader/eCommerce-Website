@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { AppValidators } from 'src/app/validators/app-validators';
 
 @Component({
   selector: 'app-edit-product',
@@ -16,6 +17,7 @@ export class EditProductComponent implements OnInit{
   constructor(private formBuilder: FormBuilder,
     private productService: ProductService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   get theProductId(){return +this.route.snapshot.paramMap.get("id")!}
@@ -24,9 +26,20 @@ export class EditProductComponent implements OnInit{
     this.addProductFormGroup = this.formBuilder.group({
       product: this.formBuilder.group({
         //add validators
-        name: new FormControl("", []),
-        desc: new FormControl("", []),
-        price: new FormControl("", []),
+        name: new FormControl("", [
+          Validators.required,
+          AppValidators.min2Length,
+          AppValidators.notOnlyWhiteSpace
+        ]),
+        desc: new FormControl("", [
+          Validators.required,
+          AppValidators.min2Length,
+          AppValidators.notOnlyWhiteSpace
+        ]),
+        price: new FormControl("", [
+          Validators.required,
+          AppValidators.notOnlyWhiteSpace
+        ]),
         available: new FormControl("", []),
         image: new FormControl("", []),
         rating: new FormControl("", []),
@@ -39,7 +52,7 @@ export class EditProductComponent implements OnInit{
         this.name.setValue(this.product!.name);
         this.desc.setValue(this.product!.desc);
         this.price.setValue(this.product!.price);
-        this.available.setValue(this.product!.available);
+        this.available.setValue(this.product!.available ? "available" : "not available");
         this.image.setValue(this.product!.image);
       }
     );
@@ -56,25 +69,25 @@ export class EditProductComponent implements OnInit{
 
   
   onSubmit() {
-    console.log("Handling the submit button");
     if (this.addProductFormGroup.invalid) {
       this.addProductFormGroup.markAllAsTouched();
-    }else{
+    } else {
       this.productService.updateProduct(new Product(
         this.theProductId,
         this.name.value,
         this.desc.value,
         this.price.value,
-        1,
+        this.available.value == "available" ? 1 : 0,
         null,
         this.rating.value,
       )).subscribe(
         data => {
+          if(data.get("code") == 200){
+            this.router.navigate(['home']);
+          }
           console.log(data);
         }
       )
-      console.log(this.addProductFormGroup.get("product")?.value);
-
     }
   }
 
