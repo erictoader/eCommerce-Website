@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../config/app-config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, map, of } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
@@ -11,8 +11,11 @@ export class LoginService {
   private _authState!: Observable<boolean>;
   private currentUser: any = null;
   private baseUrl = AppConfig.baseUrl;
-
-  constructor(private httpClient: HttpClient){}
+  private authSubject: BehaviorSubject<boolean>;
+  constructor(private httpClient: HttpClient){
+    this._authState = of(this.currentUser != null);
+    this.authSubject = new BehaviorSubject(this.currentUser != null);
+  }
 
   private placeholderImage = "assets/images/user-placeholder.png"; 
 
@@ -36,6 +39,7 @@ export class LoginService {
       map(response => {
         const responseMap = new Map(Object.entries(response));
         this.currentUser = responseMap.get("user");
+        this.authSubject.next(this.currentUser != null);
         return responseMap;
       })
     )
@@ -58,13 +62,16 @@ export class LoginService {
       map(response => {
         const responseMap = new Map(Object.entries(response));
         this.currentUser = responseMap.get("user");
+        this.authSubject.next(this.currentUser != null);
         return responseMap;
       })
     )
   }
 
-  signOut() {
+  signOut():Observable<boolean>{
     this.currentUser = null;
+    this.authSubject.next(this.currentUser != null);
+    return of(false);
   }
 
   getUser(){
@@ -73,9 +80,15 @@ export class LoginService {
 
   //TODO: make this better!
   authState():Observable<boolean>{
-    return new Observable(observer => {
-      setInterval(() => observer.next(this.currentUser != null), 1000);
-    });
+    return this.authSubject.pipe(
+      data=>{
+        console.log("test authState");
+        return data;
+      }
+    );
+    // return new Observable(observer => {
+    //   setInterval(() => observer.next(this.currentUser != null), 1000);
+    // });
   }
 
   getAllUsers():Observable<User[]>{
@@ -105,11 +118,15 @@ export class LoginService {
   }
 
   deleteUser(id: number):Observable<boolean>{
-    const deleteUrl = this.baseUrl + `user/delete/${id}`;
+    const deleteUrl = this.baseUrl + `user/delete?id=${id}`;
     return this.httpClient.delete<Map<String, any>>(deleteUrl).pipe(
       map(response => {
         console.log(response);
-        throw new Error("Check this")
+        const responseMap = new Map(Object.entries(response));
+        if (responseMap.get("code") == 200)
+          return true;
+        return false;
+        // throw new Error("Check this")
       })
     );
   }
@@ -122,13 +139,16 @@ export class LoginService {
         id: user.id,
         name: user.name,
         email: user.email,
+        userType: user.userType,
         password: user.password,
         profilePicture: user.profilePicture,
       }
     ).pipe(
       map(response => {
         console.log(response);
-        throw new Error("Check this")
+        const responseMap = new Map(Object.entries(response));
+        return responseMap.get("user");
+        // throw new Error("Check this")
       })
     );
   }

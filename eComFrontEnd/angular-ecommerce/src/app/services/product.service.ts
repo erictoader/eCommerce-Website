@@ -96,7 +96,7 @@ export class ProductService {
         );
     }
 
-    addProduct(product:Product): Observable<Product>{
+    addProduct(product:Product): Observable<Map<String, any>>{
         const addUrl = this.baseUrl + "/add";
         return this.httpClient.post<Map<String, any>>(
             addUrl, 
@@ -110,7 +110,10 @@ export class ProductService {
             ).pipe(
             map(response => {
                 console.log(response);
-                throw new Error("Check this");
+                const mapResponse = new Map(Object.entries(response));
+                return mapResponse;
+                // return mapResponse.get("product");
+                // throw new Error("Check this");
             })
         );
     }
@@ -126,11 +129,12 @@ export class ProductService {
         );      
     }
 
-    updateProduct(product:Product): Observable<Product>{
+    updateProduct(product:Product): Observable<Map<String, any>>{
         const updateUrl = this.baseUrl + "/update";
         return this.httpClient.put<Map<String, any>>(
             updateUrl, 
             {
+                id: product.id,
                 name: product.name,
                 desc: product.desc,
                 price: product.price,
@@ -140,7 +144,9 @@ export class ProductService {
             ).pipe(
             map(response => {
                 console.log(response);
-                throw new Error("Check this");
+                let responseMap = new Map(Object.entries(response));
+                return responseMap;
+                // throw new Error("Check this");
             })
         );
     }

@@ -31,6 +31,13 @@ export class UserProfileComponent {
   }
 
   deleteAccount(){
-    
+    this.loginService.deleteUser(this.user.id).subscribe(
+      data =>{
+        if(data == true){
+          this.loginService.signOut();
+          this.router.navigate(['home']);
+        }
+      }
+    );
   }
 }

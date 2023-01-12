@@ -22,6 +22,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     OrdersComponent,
     AddProductComponent,
     EditProductComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    FileUploaderComponent
   ],
   imports: [
     BrowserModule,

@@ -30,7 +30,6 @@ export class AppComponent implements OnInit{
   }
 
   isAdmin(){
-    // console.log(this.user);
     return this.user?.userType == 0;
   }
   

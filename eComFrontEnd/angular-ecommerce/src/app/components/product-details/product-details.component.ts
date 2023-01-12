@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem } from 'src/app/models/cart-item';
 import { Product } from 'src/app/models/product';
+import { User } from 'src/app/models/user';
 import { CartService } from 'src/app/services/cart.service';
+import { LoginService } from 'src/app/services/login.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -13,16 +15,20 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductDetailsComponent {
 
   product!: Product;
+  isAdmin: boolean = false;
 
   constructor(private productService: ProductService,
               private cartService: CartService,
               private route: ActivatedRoute,
-              private router: Router,) {}
+              private router: Router,
+              private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.handleProductDetails();
-    })
+    });
+    const user: User = this.loginService.getUser();
+    this.isAdmin = user.userType == 0;
   }
 
   handleProductDetails() {

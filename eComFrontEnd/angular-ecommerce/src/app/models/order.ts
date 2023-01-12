@@ -9,4 +9,5 @@ export class Order {
         public total: number,
         public items: OrderItem[],
     ){}
+    
 }

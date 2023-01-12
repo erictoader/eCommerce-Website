@@ -34,7 +34,7 @@ export class OrdersService {
     );
   }
 
-  placeOrder(order: Order){
+  placeOrder(order: Order): Observable<Map<String, any>>{
     const addUrl = this.baseUrl + "/add";
     return this.httpClient.post<Map<String, any>>(
       addUrl, 
@@ -42,12 +42,16 @@ export class OrdersService {
         username: order.buyerUsername,
         address: order.buyerAddress,
         total: order.total,
-        items: order.items,
+        items: order.items.map(item=>{
+          item.product.image = null;
+          return item;
+        }),
       }
       ).pipe(
       map(response => {
           console.log(response);
-          throw new Error("Check this");
+          const mapResponse = new Map(Object.entries(response));
+          return mapResponse;
       })
   );
   }

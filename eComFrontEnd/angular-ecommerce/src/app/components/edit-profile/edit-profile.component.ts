@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -12,18 +12,20 @@ import { LoginService } from 'src/app/services/login.service';
 export class EditProfileComponent implements OnInit{
 
   editProfileFormGroup: FormGroup = new FormGroup({});
-  private _user: User | undefined;
+  private _user: User | null;
   constructor(private formBuilder: FormBuilder,
     private loginService: LoginService,
     private route: ActivatedRoute,
-  ) {}
+    private router: Router,
+  ) {
+    this._user = null;
+  }
 
   ngOnInit(): void {
     this.editProfileFormGroup = this.formBuilder.group({
       user: this.formBuilder.group({
         //add validators
         name: new FormControl("", []),
-        username: new FormControl("aha", []),
         email: new FormControl("", []),
         userType: new FormControl("", []),
         profilePicture: new FormControl("", []),
@@ -33,14 +35,9 @@ export class EditProfileComponent implements OnInit{
     const theUsername: string = this.route.snapshot.paramMap.get("username")!;
     this.loginService.getByUsername(theUsername).subscribe(
       data => {
-        console.log(data.name);
-        console.log(data.username);
-        console.log(this.username.value);
         this._user = data;
         this.name.setValue(this._user!.name);
-        this.username.setValue(this._user.username);
         this.email.setValue(this._user!.email);
-        this.userType.setValue(this._user!.userType);
         this.profilePicture.setValue(this._user!.profilePicture);
         this.password.setValue(this._user!.password);
       }
@@ -50,10 +47,8 @@ export class EditProfileComponent implements OnInit{
 
   
   get name() { return this.editProfileFormGroup.get("user.name")!; }
-  get username() { return this.editProfileFormGroup.get("user.username")!; }
   get password() { return this.editProfileFormGroup.get("user.password")!; }
   get email() { return this.editProfileFormGroup.get("user.email")!; }
-  get userType() { return this.editProfileFormGroup.get("user.userType")!; }
   get profilePicture() { return this.editProfileFormGroup.get("user.profilePicture")!; }
 
   
@@ -62,6 +57,19 @@ export class EditProfileComponent implements OnInit{
     if (this.editProfileFormGroup.invalid) {
       this.editProfileFormGroup.markAllAsTouched();
     }else{
+      this.loginService.updateUser(new User(
+        this._user!.id,
+        this.name.value,
+        this._user!.username,
+        this.password.value,
+        this._user!.userType,
+        null, // this._user?.profilePicture
+        this._user!.registrationDate,
+        this.email.value
+
+      )).subscribe(data => {
+        this.router.navigate(["home"]);
+      })
       console.log(this.editProfileFormGroup.get("user")?.value);
     }
   }
