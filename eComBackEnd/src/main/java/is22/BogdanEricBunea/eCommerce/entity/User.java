@@ -18,7 +18,7 @@ public class User {
     private int userType;
     @Column(name = "profile_picture")
     private byte[] profilePicture;
-    @Column(name = "registration_date")
+    @Column(name = "registration_date", insertable = false, updatable = false)
     private Timestamp registrationDate;
 
     public User(int id, String name, String email, String username, String password, int userType, byte[] profilePicture, Timestamp registrationDate) {

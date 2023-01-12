@@ -1,5 +1,7 @@
 package is22.BogdanEricBunea.eCommerce.entity;
 
+import org.springframework.data.annotation.ReadOnlyProperty;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -13,8 +15,9 @@ public class Order {
     private String buyerUsername;
     @Column(name = "buyer_address")
     private String buyerAddress;
-    @Column(name = "order_date")
+    @Column(name = "order_date", insertable = false, updatable = false)
     private Timestamp orderDate;
+    @Column(name = "total")
     private float total;
 
     public Order(int id, String buyerUsername, String buyerAddress, float total) {
