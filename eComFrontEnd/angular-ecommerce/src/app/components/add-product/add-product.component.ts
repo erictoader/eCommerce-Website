@@ -43,19 +43,12 @@ export class AddProductComponent implements OnInit {
   
   onSubmit() {
     console.log("Handling the submit button");
-
     if (this.addProductFormGroup.invalid) {
       this.addProductFormGroup.markAllAsTouched();
     }else{
-      this.productService.addProduct(new Product(
-        0,
-        this.name.value,
+      this.productService.addProduct(this.name.value,
         this.desc.value,
-        this.price.value,
-        1,
-        null,
-        this.rating.value,
-      )).subscribe(
+        this.price.value, this.available.value == "available" ? 1 : 0).subscribe(
         data => {
           console.log(data);
           if (data.get("code") == 200){
@@ -66,7 +59,6 @@ export class AddProductComponent implements OnInit {
         }
       )
       console.log(this.addProductFormGroup.get("product")?.value);
-
     }
   }
 
