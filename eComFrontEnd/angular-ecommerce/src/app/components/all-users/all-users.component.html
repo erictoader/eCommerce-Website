@@ -17,7 +17,7 @@
                 <tbody>
                     <tr *ngFor="let tempUser of users">
                         <td class="align-middle">
-                            <img src="assets/images/user-placeholder.png" height="100px" width="100px" />
+                            <img src={{tempUser.profilePicture}} height="100px" width="100px" />
                         </td>
                         <td class="align-middle">{{ tempUser.id }}</td>
                         <td class="align-middle">{{ tempUser.name }}</td>

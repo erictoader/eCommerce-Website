@@ -3,6 +3,7 @@ import { AppConfig } from '../config/app-config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, Observer, map, of } from 'rxjs';
 import { User } from '../models/user';
+import { FileUploadService } from './file-upload.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class LoginService {
   private currentUser: any = null;
   private baseUrl = AppConfig.baseUrl;
   private authSubject: BehaviorSubject<boolean>;
-  constructor(private httpClient: HttpClient){
+  constructor(private httpClient: HttpClient,
+    private fileUploadService: FileUploadService){
     this._authState = of(this.currentUser != null);
     this.authSubject = new BehaviorSubject(this.currentUser != null);
   }
@@ -98,6 +100,8 @@ export class LoginService {
         // throw new Error("Check this")
         console.log(response);
         const responseMap = new Map(Object.entries(response));
+        const users = responseMap.get("users") as User[];
+        users.forEach(u=>this.handleImage(u))
         return responseMap.get("users");
       })
     );
@@ -141,7 +145,7 @@ export class LoginService {
         email: user.email,
         userType: user.userType,
         password: user.password,
-        profilePicture: user.profilePicture,
+        profilePicture: this.fileUploadService.getUploadImage().length == 0 ? user.profilePicture : this.fileUploadService.getUploadImage(),
       }
     ).pipe(
       map(response => {
