@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class FileUploaderComponent implements OnInit {
   message = '';
   preview = '';
 
-  constructor(private productService: ProductService) {}
+  constructor(private fileUploadService: FileUploadService) {}
 
   ngOnInit(): void {
   }
@@ -39,7 +39,7 @@ export class FileUploaderComponent implements OnInit {
         //   console.log(e.target.result);
           this.preview = e.target.result;
           
-        this.productService.saveUploadImage(this.preview);
+        this.fileUploadService.saveUploadImage(this.preview);
         // console.log("CHECK");
         // console.log(this.productService.getUploadImage());
         };

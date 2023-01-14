@@ -4,6 +4,7 @@ import { Product } from '../models/product'
 import { AppConfig } from '../config/app-config'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FileUploadService } from './file-upload.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,8 @@ export class ProductService {
     private baseUrl = AppConfig.baseUrl + "product";
     private placeholderImage = "assets/images/product-placeholder.png"; 
 
-     constructor(private httpClient: HttpClient){}
+     constructor(private httpClient: HttpClient, 
+        private fileUploadService: FileUploadService){}
 
     handleImage(product: Product){
         if(product.image == null){
@@ -105,7 +107,7 @@ export class ProductService {
                 desc: desc,
                 price: price,
                 available: available,
-                image: this.productUploadImage,
+                image: this.fileUploadService.getUploadImage(),
             }
             ).pipe(
             map(response => {
@@ -139,7 +141,7 @@ export class ProductService {
                 desc: product.desc,
                 price: product.price,
                 available: product.available,
-                image: product.image,
+                image: this.fileUploadService.getUploadImage().length == 0 ? product.image : this.fileUploadService.getUploadImage(),
             }
             ).pipe(
             map(response => {
@@ -149,15 +151,5 @@ export class ProductService {
                 // throw new Error("Check this");
             })
         );
-    }
- 
-
-    private productUploadImage: String = "";
-    saveUploadImage(image: String){
-        let index = image.indexOf(",");
-        this.productUploadImage = image.substring(index + 1);
-    }
-    getUploadImage(){
-        return this.productUploadImage;
     }
 }
