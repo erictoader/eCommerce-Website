@@ -1,7 +1,8 @@
 /* NEW CSS */
 
 .contact {
-    background-color: rgb(80,68,164);
+    background-color: rgb(89, 175, 219);
+    /* background-color: rgb(80,68,164); */
     background-repeat: no-repeat;
     background-size: 100% 100%;
     padding: 90px 0;
@@ -9,29 +10,29 @@
 
 .main_form {
     padding: 70px 50px;
-    border: #fff solid 2px;
+    border: black solid 2px;
     margin: 0 50px;
 }
 
 .main_form .contactus {
-    border: #fff solid 2px;
+    border: black solid 2px;
     padding: 0px 15px;
     margin-bottom: 25px;
     width: 100%;
     height: 57px;
     background: transparent;
-    color: #fff;
+    color: black;
     font-size: 18px;
     font-weight: normal;
 }
 
 .main_form .textarea {
-    border: #fff solid 2px;
+    border: black solid 2px;
     padding: 0px 15px;
     margin-bottom: 25px;
     width: 100%;
     background: transparent;
-    color: #fff;
+    color: black;
     font-size: 18px;
     font-weight: normal;
     padding-top: 56px;
@@ -139,7 +140,7 @@ p{
 }
 
 h1,h2,h3,h4,h5,h6{
-    color:white;
+    color:black;
     font-weight:700;
     margin:0;
     line-height:1.2
@@ -622,10 +623,22 @@ input.au-input.au-input-xl{
  * ----------------------------
  */
 
+ .product-box{
+    margin-bottom:60px;
+    border-radius: 25px;
+    background-color: orange;
+}
+
 .product-box img {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
+    border-radius: 25px;
+    /* display: block; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* width: 100%; */
+    height: 200px;
+    /* width: 150px; */
+    /* height: 150px; */
+    object-fit: fill;
 }
 
 .items select {
@@ -637,9 +650,7 @@ input.au-input.au-input-xl{
     outline: 0;
     margin-left: 5px;
 }
-.product-box{
-    margin-bottom:60px
-}
+
 .price{
     margin:15px 0 0;
     font-weight:800;

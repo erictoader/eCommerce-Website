@@ -1,8 +1,35 @@
+
 <div class="main-content">
+    <main class="container">
+ 
+        <!-- Left Column / Headphones Image -->
+        <div class="left-column">
+          <img src="{{product.image}}" alt="{{product.name}}">
+        </div>
+       
+       
+        <!-- Right Column -->
+        <div class="right-column">
+       
+          <!-- Product Description -->
+          <div class="product-description">
+            <span>{{product.name}}</span>
+            <h1>{{product.name}}</h1>
+            <p>{{product.desc}}</p>
+          </div>
+       
+          <!-- Product Pricing -->
+          <div class="product-price">
+            <span>148$</span>
+            <a href="#" class="cart-btn">Add to cart</a>
+          </div>
+        </div>
+      </main>
+    
     <div class="details-section">
         <div class="container-fluid">
 
-            <img src="{{product.image}}" class="detail-img">
+            <!-- <img src="{{product.image}}" class="detail-img"> -->
 
             <h3>{{product.name}}</h3>
             <h6> Status: {{product.available == 1 ? "Available": "Not Available"}}</h6>

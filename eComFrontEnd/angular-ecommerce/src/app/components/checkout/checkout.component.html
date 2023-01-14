@@ -3,9 +3,8 @@
     <div class=""section-content section-content-p30>
         <div class="container-fluid">
             <form  id="request" class="main_form" [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
-                <!-- style="background-color: rgb(79, 176, 233);" -->
-                <div formGroupName="customer" class="form-area">
-                    <div style="padding-bottom:50px">
+                <div formGroupName="customer">
+                    <div style="padding-bottom:20px">
                         <h2>Customer</h2>
                     </div>
                     <div class="row">
@@ -50,8 +49,8 @@
                         </div>
                     </div>
                 </div>
-                <div formGroupName="shippingAddress" class="form-area">
-                    <div style="padding-bottom:50px">
+                <div formGroupName="shippingAddress">
+                    <div style="padding-bottom:20px; padding-top: 30px;">
                         <h2>Shipping Address</h2>
                     </div>
                     <div class="row">
@@ -108,8 +107,8 @@
                     </div>
                 </div>
 
-                <div formGroupName="billingAddress" class="form-area">
-                    <div style="padding-bottom:50px">
+                <div formGroupName="billingAddress">
+                    <div style="padding-bottom:20px; padding-top: 30px;">
                         <h2>Billing Address</h2>
                     </div>
                     <div class="row">
@@ -159,8 +158,8 @@
                    
                 </div>
 
-                <div formGroupName="cardDetails" class="form-area">
-                    <div style="padding-bottom:50px">
+                <div formGroupName="cardDetails">
+                    <div style="padding-bottom:20px; padding-top: 30px;">
                         <h2>Card Details</h2>
                     </div>
                     <div class="row">
@@ -246,15 +245,14 @@
                     </div>
                 </div>
 
-                <div class="form-area">
-                    <div style="padding-bottom:50px">
-                        <h2>Review Your Order</h2>
-                    </div>
-                    <h6>Total Quantity: {{totalQuantity}}</h6>
-                    <h6>Shipping: FREE</h6>
-                    <h6>TotalPrice: {{totalPrice | currency: "EUR"}}</h6>
+                <div style="padding-bottom:20px; padding-top: 30px;">
+                    <h2>Review Your Order</h2>
                 </div>
-
+                <div>
+                    <h5>Total Quantity: {{totalQuantity}}</h5>
+                    <h5>Shipping: FREE</h5>
+                    <h5>TotalPrice: {{totalPrice | currency: "EUR"}}</h5>
+                </div>
                 <div class="text-center">
                     <div  type="submit" class="col-md-12">
                         <button class="send_btn">Purchase</button>

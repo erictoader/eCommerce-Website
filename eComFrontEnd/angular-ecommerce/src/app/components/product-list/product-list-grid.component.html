@@ -1,32 +1,54 @@
 <div class="main-content">
     <div class="selection-contetnt selection-content-p30">
         <div class="container-fluid">
+            <div class = "container py-5">
             <div class="row">
                 <!-- loop over the collection of products -->
-                <div *ngFor="let tempProduct of products" class="col-md-3">
-                    <div class="product-box">
-                        <a routerLink="/products/{{tempProduct.id}}">
-                            <img src={{tempProduct.image}} alt={{tempProduct.name}} class="img-responsive" />
+                <div *ngFor="let tempProduct of products" class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                    <div style="padding-bottom: 50px; padding-right: 15px; padding-left: 15px;">
+                        <div class="card">
+                          <a routerLink="/products/{{tempProduct.id}}">
+                            <img src={{tempProduct.image}} alt={{tempProduct.name}} class="card-img-top"/>
                         </a>
-                        <a routerLink="/products/{{tempProduct.id}}">
-                            <h1>{{ tempProduct.name }}</h1>
-                            <h6>Status: {{tempProduct.available == 1 ? "Available": "Not Available"}}</h6>
-                            <h6> Rating: {{tempProduct.rating}}</h6>
-                        </a>
-                        <div class="price">{{tempProduct.price | currency:'EUR'}}</div>
-                        <div *ngIf="tempProduct?.available == 1">
-                            <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <!-- <p class="small"><a href="#!" class="text-muted">Laptops</a></p> -->
+                              <!-- <p class="small text-danger"><s>$1099</s></p> -->
+                            </div>
+                
+                            <div class="d-flex justify-content-between mb-3">
+                                <a routerLink="/products/{{tempProduct.id}}" style="text-decoration: none;">
+                                    <h5 class="mb-0">{{tempProduct.name}}</h5>
+                                </a>
+                              <h5 class="text-dark mb-0">{{tempProduct.price | currency:'EUR'}}</h5>
+                            </div>
+                
+                            <div class="d-flex mb-2">
+                                <div class="text-warning" *ngFor="let rating of [1, 2, 3, 4, 5]">
+                                    <i *ngIf="tempProduct.rating >= rating" class="fa fa-star"></i>
+                                    <i *ngIf="tempProduct.rating - rating == -0.5" class="fa fa-star-half-alt"></i>
+                                    <i *ngIf="tempProduct.rating - rating <= -1"class="far fa-star"></i>
+                                </div>
+                            </div>
+                             <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
+                                <p class="text-muted mb-0">{{tempProduct.available == 1 ? "Available": "Not Available"}}</p>
+                                <div *ngIf="tempProduct?.available == 0">
+                                    <button type="button" class="btn btn-primary" disabled>ADD TO CART</button>
+                                </div>
+                                <div *ngIf="tempProduct?.available == 1">
+                                    <button (click)="addToCart(tempProduct)" type="button" class="btn btn-primary">ADD TO CART</button>
+                                </div>
+                              </div>
+                          </div>
                         </div>
-                        <div *ngIf="tempProduct?.available == 0">
-                            <button class="btn btn-primary btn-sm" disabled>Add to cart</button>
-                        </div>
-                    </div>
+                      </div>
                 </div>    
                 
                 <!-- if products empty then display a message-->
-                <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                <!-- <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
                     No products found.
-                </div>
+                </div> -->
+            </div>
             </div>
         </div>
     </div>
