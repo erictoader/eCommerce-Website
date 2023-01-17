@@ -9,7 +9,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <input formControlName="firstName" type="type" class="contactus" placeholder="First Name"  >
+                            <input formControlName="firstName" type="type" class="contactus" placeholder="First Name">
                             <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger mt-1">
                                 <div *ngIf="(firstName.errors != null && (firstName.errors['required'] || firstName.errors['notOnlyWhiteSpace']))">
                                     First Name is required

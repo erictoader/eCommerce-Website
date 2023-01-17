@@ -7,9 +7,11 @@ html, body {
   }
    
   .container {
-    max-width: 1200px;
+    /* max-width: 1300px; */
     margin: 0 auto;
-    padding: 15px;
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 45px;
     display: flex;
   }
 
@@ -117,22 +119,19 @@ html, body {
   .product-price span {
     font-size: 26px;
     font-weight: 300;
-    color: #43474D;
+    color: black;
     margin-right: 20px;
   }
    
   .cart-btn {
     display: inline-block;
-    background-color: #7DC855;
+    background-color: #0da8e4;
     border-radius: 6px;
     font-size: 16px;
     color: #FFFFFF;
     text-decoration: none;
     padding: 12px 30px;
     transition: all .5s;
-  }
-  .cart-btn:hover {
-    background-color: #64af3d;
   }
 
   /* Cable Configuration */

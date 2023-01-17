@@ -1,36 +1,26 @@
 <div class="main-content page-m">
     <div class=""section-content section-content-p30>
-        <form [formGroup]="loginFormGroup" (ngSubmit)="onLogin()">
-            <div formGroupName="loginData" class="form-area">
+        <form id="request" class="main_form"  [formGroup]="loginFormGroup" (ngSubmit)="onLogin()">
+            <div formGroupName="loginData">
                 <div style="padding-bottom:50px">
                     <h2>Login</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
-                        <label>Username</label>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="input-space">
-                            <input formControlName="username" type="login-text" (keydown.space)="$event.preventDefault();">
-                            <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger mt-1">
-                                <div *ngIf="(username.errors != null && (username.errors['required'] || username.errors['notOnlyWhiteSpace']))">
-                                    Username is required
-                                </div>
+                    <div class="col-md-12">
+                        <input formControlName="username" type="login-text" (keydown.space)="$event.preventDefault();" type="type" class="contactus" placeholder="Username">
+                        <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger mt-1">
+                            <div *ngIf="(username.errors != null && (username.errors['required'] || username.errors['notOnlyWhiteSpace']))">
+                                Username is required
                             </div>
-                        </div>
+                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
-                        <label>Password</label>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="input-space">
-                            <input formControlName="password" type="password" (keydown.space)="$event.preventDefault();">
-                            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1">
-                                <div *ngIf="(password.errors != null && (password.errors['required'] || password.errors['notOnlyWhiteSpace']))">
-                                    Password is required
-                                </div>
+                    <div class="col-md-12">
+                        <input formControlName="password" type="password" (keydown.space)="$event.preventDefault();" class="contactus" placeholder="Password">
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1">
+                            <div *ngIf="(password.errors != null && (password.errors['required'] || password.errors['notOnlyWhiteSpace']))">
+                                Password is required
                             </div>
                         </div>
                     </div>
@@ -40,9 +30,9 @@
                 {{errorToDisplay}}
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-info">
-                    Login
-                </button>
+                <div  type="submit" class="col-md-12">
+                    <button class="send_btn">Login</button>
+                 </div>
             </div>
             <div class="text-center">
                 <button routerLink="/register" class="security-btn">

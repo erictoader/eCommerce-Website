@@ -19,42 +19,25 @@
           </div>
        
           <!-- Product Pricing -->
-          <div class="product-price">
-            <span>148$</span>
-            <a href="#" class="cart-btn">Add to cart</a>
+          <div class="product-price" *ngIf="product?.available == 1">
+            <span>{{product.price | currency:'EUR'}}</span>
+            <button (click)="addToCart()" class="cart-btn">Add to cart</button>
+          </div>
+          <div class="product-price" *ngIf="product?.available == 0">
+            <span>{{product.price | currency:'EUR'}}</span>
+            <button class="cart-btn" disabled>Add to cart</button>
+          </div>
+          <div class="d-flex mb-2">
+            <div class="text-warning" *ngFor="let rating of [1, 2, 3, 4, 5]">
+                <i *ngIf="product.rating >= rating" class="fa fa-star"></i>
+                <i *ngIf="product.rating - rating == -0.5" class="fa fa-star-half-alt"></i>
+                <i *ngIf="product.rating - rating <= -1"class="far fa-star"></i>
+            </div>
+        </div>
+          <div  class="product-price" *ngIf="isAdmin" style="padding-top: 10px;">
+            <button class="cart-btn" (click)="editProduct()" style="margin-right: 50px;">Edit</button>
+            <button class="cart-btn" (click)="deleteProduct()">Delete</button>
           </div>
         </div>
       </main>
-    
-    <div class="details-section">
-        <div class="container-fluid">
-
-            <!-- <img src="{{product.image}}" class="detail-img"> -->
-
-            <h3>{{product.name}}</h3>
-            <h6> Status: {{product.available == 1 ? "Available": "Not Available"}}</h6>
-            <h6> Rating: {{product.rating}}</h6>
-
-            <div class="price">{{product.price | currency:'EUR'}}</div>
-            <div *ngIf="product?.available == 1">
-                <button (click)="addToCart()" class="btn btn-primary btn-sm">Add to cart</button>
-            </div>
-            <div *ngIf="product?.available == 0">
-                <button class="btn btn-primary btn-sm" disabled>Add to cart</button>
-            </div>
-            
-
-            <!-- only admin/seller -->
-            <div  *ngIf="isAdmin" style="padding-top: 10px;">
-                <button (click)="editProduct()" class="btn btn-primary btn-sm">Edit</button>
-                <button (click)="deleteProduct()" class="btn btn-primary btn-sm">Delete</button>
-            </div>
-
-            <hr>
-            <h4>Description</h4>
-            <p>{{product.desc}}</p>
-
-            <a routerLink="/products" class="mt-5">Back to Product List</a>
-        </div>
-    </div>
 </div>
