@@ -2,27 +2,33 @@
             <table class="table">
                 <thead class="table-dark">
                     <tr>
-                        <th></th>
-                        <th>Id</th>
                         <th>Name</th>
                         <th>Username</th>
-                        <th>Email</th>
                         <th>User Type</th>
                         <th>Registration Date</th>
-                        <th></th>
+                        <th>Actions</th>
                         <th></th>
                     </tr>
             
                 </thead>
                 <tbody>
                     <tr *ngFor="let tempUser of users">
+                        
                         <td class="align-middle">
-                            <img src={{tempUser.profilePicture}} height="100px" width="100px" />
+                            <div class="d-flex align-items-center">
+                                <img
+                                    src={{tempUser.profilePicture}}
+                                    alt=""
+                                    style="width: 55px; height: 55px"
+                                    class="rounded-circle"
+                                    />
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1">{{ tempUser.name }}</p>
+                                  <p class="text-muted mb-0">{{ tempUser.email }}</p>
+                                </div>
+                              </div>
                         </td>
-                        <td class="align-middle">{{ tempUser.id }}</td>
-                        <td class="align-middle">{{ tempUser.name }}</td>
                         <td class="align-middle">{{ tempUser.username }}</td>
-                        <td class="align-middle">{{ tempUser.email }}</td>
                         <td class="align-middle" *ngIf ="tempUser.userType == 0">Admin</td>
                         <td class="align-middle" *ngIf ="tempUser.userType == 1">Customer</td>
                         <td class="align-middle" *ngIf ="tempUser.userType == 2">Seller</td>

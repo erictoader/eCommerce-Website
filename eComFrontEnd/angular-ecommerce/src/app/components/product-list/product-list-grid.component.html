@@ -4,9 +4,9 @@
             <div class = "container py-5">
             <div class="row">
                 <!-- loop over the collection of products -->
-                <div *ngFor="let tempProduct of products" class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                <div *ngFor="let tempProduct of products" class="col-md-6 col-lg-3 mb-4 mb-md-0 mb-md-0">
                     <div style="padding-bottom: 50px; padding-right: 15px; padding-left: 15px;">
-                        <div class="card">
+                        <div class="card" style="height: 500px;">
                           <a routerLink="/products/{{tempProduct.id}}">
                             <img src={{tempProduct.image}} alt={{tempProduct.name}} class="card-img-top"/>
                         </a>
@@ -36,7 +36,7 @@
                                     <button type="button" class="btn btn-primary" disabled>ADD TO CART</button>
                                 </div>
                                 <div *ngIf="tempProduct?.available == 1">
-                                    <button (click)="addToCart(tempProduct)" type="button" class="btn btn-primary">ADD TO CART</button>
+                                    <button (click)="addToCart(tempProduct)" type="button" class="btn btn-primary">Add to cart</button>
                                 </div>
                               </div>
                           </div>
