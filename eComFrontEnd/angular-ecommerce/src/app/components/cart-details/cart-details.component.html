@@ -2,68 +2,89 @@
     <div class="section-content section-content-p30">
         <div class="container-fluid">
             <div *ngIf="cartItems.length > 0">
-                <table class="table table-bordered">
-                    <tr>
-                        <th width="20%">ProductImage</th>
-                        <th width="50%">Product Detail</th>
-                        <th width="30%"></th>
-                    </tr>
-
-                    <tr *ngFor="let tempCartItem of cartItems">
-                        <td>
-                            <img src="{{tempCartItem.image}}" class="img-responsive" width="150px">
-                        </td>
-                        <td>
-                            <p>{{tempCartItem.name}}</p>
-                            <p>{{tempCartItem.price | currency: "EUR"}}</p>
-                        </td>
-                        <td>
-                            <div class="items">
-                                <label>Quantity:</label>
-                                <div class="row no-gutters">
-                                    <div class="col">
-                                        <button (click)="incrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
-                                            <i class="fas fa-plus"></i>
+                <div *ngFor="let tempCartItem of cartItems">
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-md-12 col-xl-10">
+                          <div class="card shadow-0 border rounded-3">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                    <img src={{tempCartItem.image}}
+                                      class="w-100" />
+                                    <a href="#!">
+                                      <div class="hover-overlay">
+                                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                                      </div>
+                                    </a>
+                                  </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-xl-6">
+                                  <h5>{{tempCartItem.name}}</h5>
+                                  <div class="d-flex flex-row">
+                                    <div class="text-danger mb-1 me-2" *ngFor="let rating of [1, 2, 3, 4, 5]">
+                                        <i *ngIf="tempCartItem.product.rating >= rating" class="fa fa-star"></i>
+                                        <i *ngIf="tempCartItem.product.rating - rating == -0.5" class="fa fa-star-half-alt"></i>
+                                        <i *ngIf="tempCartItem.product.rating - rating <= -1"class="far fa-star"></i>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    {{tempCartItem.product.desc}}
+                                  </p>
+                                </div>
+                                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                                  <div class="d-flex flex-row align-items-center mb-1">
+                                    <h4 class="mb-1 me-1">{{tempCartItem.price | currency: "EUR"}}</h4>
+                                  </div>
+                                  <div class="items">
+                                    <label>Quantity:</label>
+                                    <div class="row no-gutters">
+                                        <div class="col">
+                                            <button (click)="incrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col ml-4 mr-2">
+                                            {{tempCartItem.quantity}}
+                                        </div>
+                                        <div class="col">
+                                            <button (click)="decrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>    
+                                    </div>
+                                    <div class="d-flex flex-column mt-4" style="padding-right: 30px;">
+                                        <button (click)="removeFromCart(tempCartItem)" class="btn btn-primary btn-sm" type="button">
+                                            Remove
                                         </button>
                                     </div>
-                                    <div class="col ml-4 mr-2">
-                                        {{tempCartItem.quantity}}
-                                    </div>
-                                    <div class="col">
-                                        <button (click)="decrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-8"></div>
-
+                                </div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="text-center">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-12 col-xl-10">
+                      <div class="card shadow-0 border rounded-3">
+                        <div class="card-body">
+                            <div>
+                                <p>Total Quantity: {{totalQuantity}}</p>
+                                <p *ngIf="isLoggedIn()">Shipping: FREE</p>
+                                <p>Total Price: {{totalPrice | currency: "EUR"}}</p>
+                                <div class="d-flex flex-column mt-4" >
+                                    <button (click)="gotoCheckout()" class="btn btn-primary">Checkout</button>
                                 </div>
                             </div>
-                            
-                            <div>  
-                                <button (click)="removeFromCart(tempCartItem)" class="btn btn-primary btn-sm mt-2">
-                                    Remove
-                                </button>
-                            </div>
-
-                          
-
-                            <p class="mt-2">Subtotal: {{tempCartItem.quantity * tempCartItem.price | currency: "EUR"}}
-                            </p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2"></td>
-                        <td style="font-weight: bold">
-                            <p>Total Quantity: {{totalQuantity}}</p>
-                            <p *ngIf="isLoggedIn()">Shipping: FREE</p>
-                            <p>Total Price: {{totalPrice | currency: "EUR"}}</p>
-                            <div>
-                                <button (click)="gotoCheckout()" class="btn btn-primary">Checkout</button>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
             </div>
             <div *ngIf="cartItems.length == 0" class="alert alert-warning col-md-12" role="alert">
                 Your shopping cart is empty.

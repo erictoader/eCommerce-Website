@@ -7,31 +7,23 @@
                 <th>Buyer Address</th>
                 <th>Order Date</th>
                 <th>Total</th>
-                <th></th>
+                <!-- <th></th> -->
                 <th></th>
             </tr>
     
         </thead>
         <tbody>
             <tr *ngFor="let tempOrder of orders">
-                <!-- <td class="align-middle">
-                    <img src="assets/images/user-placeholder.png" height="100px" width="100px" />
-                </td> -->
                 <td class="align-middle">{{ tempOrder.id }}</td>
                 <td class="align-middle">{{ tempOrder.buyerUsername }}</td>
                 <td class="align-middle">{{ tempOrder.buyerAddress }}</td>
                 <td class="align-middle">{{ tempOrder.orderDate }}</td>
-                <td class="align-middle">{{ tempOrder.total }}</td>
-                <td class="align-middle">
-                    <div style="color: green;">
-                        Details
-                    </div>
-                </td>
-                <td class="align-middle">
+                <td class="align-middle">{{ tempOrder.total | currency: "EUR" }}</td>
+                <!-- <td class="align-middle">
                     <div style="color: red;">
                         Delete
                     </div>
-                </td>
+                </td> -->
             </tr>
         </tbody>
     </table>
