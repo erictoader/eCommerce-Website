@@ -4,6 +4,7 @@ import { Product } from 'src/app/models/product';
 import { ActivatedRoute } from '@angular/router';
 import { CartItem } from 'src/app/models/cart-item';
 import { CartService } from 'src/app/services/cart.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -14,6 +15,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class ProductListComponent implements OnInit {
 
+  isLoading: boolean = false;
   products : Product[] = [];
   currentCategoryId: number = 1;
   searchMode: boolean = false;
@@ -39,11 +41,14 @@ export class ProductListComponent implements OnInit {
 
   handleSearchProducts(){
     const theKeyword = this.route.snapshot.paramMap.get("keyword")!;
+    this.isLoading  =true;
     this.productService.searchProducts(theKeyword).subscribe(
       data => {
         this.products = data;
       }
     );
+    this.isLoading  = false;
+
   }
 
   handleListProducts(){
