@@ -19,7 +19,8 @@ export class ProductService {
 
     handleImage(product: Product){
         if(product.image == null){
-            product.image = this.placeholderImage;
+            return;
+            // product.image = this.placeholderImage;
         }else {
             product.image = "data:image/webp;base64," + product.image;
         }    
@@ -27,8 +28,10 @@ export class ProductService {
 
     handleProductsResponse(response: any){
         const mapResponse = new Map(Object.entries(response));
-        const products = mapResponse.get("products") as Product[];
+        let products = mapResponse.get("products") as Product[];
         products.forEach(product => this.handleImage(product));
+        products = products.filter(p=>p.image != null);
+
         return products;
     }
 
