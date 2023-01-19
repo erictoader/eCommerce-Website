@@ -203,6 +203,8 @@ a,a:hover{
 }
 
 .main-content{
+    /* background-color: red; */
+    background-image: url("assets/images/bg3.png");
     padding-top:116px;
     min-height:100vh
 }
